@@ -12,3 +12,24 @@ g06-hologram: готово (gpt-image-1.5, 43 с)
 g07-free-1: готово (gpt-image-1.5, 35 с)
 g08-ui-kit: готово (gpt-image-1.5, 34 с)
 t01-hero-ideas: готово (gpt-5.1)
+
+== 2026-11-25 11:04:04 UTC ==
+Доступно моделей: 462
+Модели картинок по порядку: ['gpt-image-1.5', 'gpt-image-1']
+Модели текста по порядку: ['gpt-5.1', 'gpt-5', 'gpt-4.1', 'gpt-4o']
+g01-dark-matter: уже есть, пропускаю
+g02-exploded: уже есть, пропускаю
+g03-liquid-metal: уже есть, пропускаю
+g04-laboratory: уже есть, пропускаю
+g05-conveyor: уже есть, пропускаю
+g06-hologram: уже есть, пропускаю
+g07-free-1: уже есть, пропускаю
+g08-ui-kit: уже есть, пропускаю
+h01-editorial-dark: готово (gpt-image-1.5, 41 с)
+h02-swiss-precision: готово (gpt-image-1.5, 37 с)
+h03-glass: готово (gpt-image-1.5, 40 с)
+h04-monochrome-3d: готово (gpt-image-1.5, 40 с)
+h05-bold-color: готово (gpt-image-1.5, 40 с)
+h06-cinematic: готово (gpt-image-1.5, 41 с)
+h07-tech-wireframe: готово (gpt-image-1.5, 42 с)
+h08-soft-premium: готово (gpt-image-1.5, 43 с)
