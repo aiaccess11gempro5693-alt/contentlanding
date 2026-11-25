@@ -1,0 +1,45 @@
+name: GPT — генерация макетов
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [claude/exciting-ritchie-3g0i71]
+    paths:
+      - interfaces/gpt/jobs.json
+      - interfaces/gpt/generate.py
+      - .github/workflows/gpt-generate.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gpt-generate
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Генерация через CometAPI
+        env:
+          COMETAPI_KEY: ${{ secrets.COMETAPI_KEY }}
+          COMET_API_KEY: ${{ secrets.COMET_API_KEY }}
+          COMETAPI_API_KEY: ${{ secrets.COMETAPI_API_KEY }}
+          COMET_KEY: ${{ secrets.COMET_KEY }}
+          API_KEY: ${{ secrets.API_KEY }}
+          KEY: ${{ secrets.KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: python interfaces/gpt/generate.py
+      - name: Сохранить результаты в ветку
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add interfaces/gpt/out
+          git commit -m "GPT: результаты генерации макетов" || exit 0
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
