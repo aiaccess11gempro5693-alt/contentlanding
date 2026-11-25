@@ -27,6 +27,7 @@ jobs:
           python-version: "3.12"
       - name: Генерация через CometAPI
         env:
+          COMETAPI: ${{ secrets.COMETAPI }}
           COMETAPI_KEY: ${{ secrets.COMETAPI_KEY }}
           COMET_API_KEY: ${{ secrets.COMET_API_KEY }}
           COMETAPI_API_KEY: ${{ secrets.COMETAPI_API_KEY }}

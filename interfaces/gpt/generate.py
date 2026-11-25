@@ -17,7 +17,7 @@ OUT = os.path.join(HERE, "out")
 os.makedirs(OUT, exist_ok=True)
 
 KEY = next((os.environ[n] for n in (
-    "COMETAPI_KEY", "COMET_API_KEY", "COMETAPI_API_KEY", "COMET_KEY",
+    "COMETAPI", "COMETAPI_KEY", "COMET_API_KEY", "COMETAPI_API_KEY", "COMET_KEY",
     "API_KEY", "KEY", "OPENAI_API_KEY") if os.environ.get(n)), None)
 log_lines = []
 
