@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Катализ — Точность в каждой детали</title>
+<meta name="description" content="Катализ — студия контента полного цикла Центра Бизнес Технологий. Вариант 02: Exploded view.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap&subset=cyrillic" rel="stylesheet">
+<style>
+:root{--bg:#E7EAEE;--paper:#F2F4F6;--ink:#11151B;--ink2:#4B5361;--ink3:#7D8592;--line:rgba(17,21,27,.16);--hair:rgba(17,21,27,.065);--acc:#FF4A0F;--acc2:#FFE3D8;--mono:"JetBrains Mono",ui-monospace,monospace;--sans:"Onest",system-ui,sans-serif;--gut:clamp(16px,3.4vw,48px)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;overflow-x:hidden;
+background-image:linear-gradient(var(--hair) 1px,transparent 1px),linear-gradient(90deg,var(--hair) 1px,transparent 1px),linear-gradient(rgba(17,21,27,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(17,21,27,.03) 1px,transparent 1px);
+background-size:80px 80px,80px 80px,16px 16px,16px 16px;background-position:-1px -1px}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--acc);color:#fff}
+.mono{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.acc{color:var(--acc)}
+/* NAV */
+.nav{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;gap:24px;padding:14px var(--gut);background:rgba(231,234,238,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:10px;margin-right:auto}
+.brand svg{width:28px;height:28px;flex:none}
+.brand b{font-weight:700;font-size:19px;letter-spacing:-.02em;display:block;line-height:1}
+.brand small{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;color:var(--ink2);margin-top:3px}
+.nav nav{display:flex;gap:22px}
+.nav nav a{font-size:14px;color:var(--ink2);position:relative;padding:4px 0}
+.nav nav a:before{content:"";position:absolute;left:0;bottom:0;height:1px;width:100%;background:var(--acc);transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.7,0,.2,1)}
+.nav nav a:hover{color:var(--ink)}.nav nav a:hover:before{transform:scaleX(1)}
+/* BUTTONS: drafting style with registration corners */
+.btn{--c:var(--ink);position:relative;display:inline-flex;align-items:center;gap:14px;height:52px;padding:0 22px;font:500 15px/1 var(--sans);border:1px solid var(--c);color:var(--c);background:transparent;cursor:pointer;transition:color .3s,background .3s,padding .35s cubic-bezier(.7,0,.2,1);white-space:nowrap}
+.btn i{font-style:normal;font-family:var(--mono);font-size:12px;transition:transform .35s cubic-bezier(.7,0,.2,1)}
+.btn:before,.btn:after{content:"";position:absolute;width:9px;height:9px;border:1.5px solid var(--acc);opacity:0;transition:all .35s cubic-bezier(.7,0,.2,1)}
+.btn:before{left:-1px;top:-1px;border-right:0;border-bottom:0}
+.btn:after{right:-1px;bottom:-1px;border-left:0;border-top:0}
+.btn:hover:before{left:-7px;top:-7px;opacity:1}.btn:hover:after{right:-7px;bottom:-7px;opacity:1}
+.btn:hover i{transform:translateX(5px)}
+.btn.pri{background:var(--acc);border-color:var(--acc);color:#fff}
+.btn.pri:hover{background:var(--ink);border-color:var(--ink)}
+.btn.sec{border-style:dashed}
+.btn.sec:hover{background:var(--ink);color:var(--paper);border-style:solid}
+.btn .tol{position:absolute;left:0;right:0;top:calc(100% + 6px);font:500 9.5px/1 var(--mono);letter-spacing:.06em;color:var(--ink3);display:flex;align-items:center;gap:6px;opacity:0;transform:translateY(-4px);transition:.35s}
+.btn .tol:before,.btn .tol:after{content:"";flex:1;height:1px;background:var(--ink3)}
+.btn:hover .tol{opacity:1;transform:none}
+.nav .btn{height:40px;padding:0 16px;font-size:14px}
+/* HERO */
+#hero{position:relative;height:460vh}
+.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+#gl{position:absolute;inset:0;width:100%;height:100%;display:block}
+#ov{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+#ov path{fill:none;stroke:var(--ink);stroke-width:1}
+#ov .a{stroke:var(--acc)}
+#ov text{font:500 11px var(--mono);fill:var(--ink);letter-spacing:.04em}
+.callout{position:absolute;left:0;top:0;pointer-events:none;font-family:var(--mono);font-size:11px;line-height:1.35;padding:6px 9px;background:rgba(242,244,246,.92);border:1px solid var(--ink);white-space:nowrap;opacity:0;will-change:transform}
+.callout b{display:block;font-family:var(--sans);font-weight:600;font-size:13px;letter-spacing:0}
+.callout span{color:var(--ink2)}
+.callout.l{transform-origin:right}
+.copy{position:absolute;left:var(--gut);top:50%;transform:translateY(-46%);max-width:min(560px,46vw);z-index:2}
+.eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:22px;color:var(--ink2)}
+.eyebrow:before{content:"";width:28px;height:1px;background:var(--acc)}
+h1{font-weight:600;font-size:clamp(42px,6.3vw,98px);line-height:.95;letter-spacing:-.045em}
+h1 em{font-style:normal;position:relative;color:var(--acc)}
+h1 em:after{content:"± 0.01";position:absolute;left:calc(100% + 14px);bottom:.32em;font:500 11px var(--mono);letter-spacing:.06em;color:var(--ink2);border-bottom:1px solid var(--ink2);padding-bottom:2px}
+.sub{margin:26px 0 34px;font-size:clamp(16px,1.3vw,19px);color:var(--ink2);max-width:470px}
+.ctas{display:flex;gap:14px;flex-wrap:wrap}
+.hud{position:absolute;right:var(--gut);top:92px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line);background:rgba(242,244,246,.7);min-width:230px}
+.hud div{display:flex;justify-content:space-between;gap:18px;padding:7px 12px;border-top:1px solid var(--line)}
+.hud div:first-child{border-top:0}
+.hud b{font-weight:700;color:var(--ink)}
+.hud .cnt b{color:var(--acc);font-size:13px}
+.cap{position:absolute;left:var(--gut);bottom:34px;z-index:2;max-width:560px}
+.cap .ticks{display:flex;gap:6px;margin-bottom:16px}
+.cap .ticks span{width:44px;height:3px;background:var(--line);position:relative;overflow:hidden}
+.cap .ticks span i{position:absolute;inset:0;background:var(--acc);transform:scaleX(0);transform-origin:left}
+.cap .n{color:var(--ink2);margin-bottom:6px}
+.cap h2{font-size:clamp(26px,2.6vw,40px);font-weight:600;letter-spacing:-.03em;line-height:1.05}
+.cap p{color:var(--ink2);font-size:16px;margin-top:6px}
+.cap .sw{transition:opacity .35s,transform .45s cubic-bezier(.7,0,.2,1)}
+.cap .sw.out{opacity:0;transform:translateY(10px)}
+.stamp{position:absolute;right:var(--gut);bottom:34px;display:grid;grid-template-columns:auto auto auto;border:1px solid var(--ink);font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;background:rgba(242,244,246,.75)}
+.stamp span{padding:6px 10px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stamp span:nth-child(3n){border-right:0}.stamp span:nth-last-child(-n+3){border-bottom:0}
+.stamp .big{font-family:var(--sans);font-weight:700;font-size:14px;text-transform:none;letter-spacing:-.01em}
+.hint{position:absolute;left:50%;bottom:30px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--ink2)}
+.hint:after{content:"";width:1px;height:38px;background:linear-gradient(var(--ink) 50%,transparent 50%);background-size:1px 8px;animation:hint 1.2s linear infinite}
+@keyframes hint{to{background-position:0 16px}}
+/* SECTIONS */
+section.s{position:relative;padding:clamp(80px,11vw,160px) var(--gut);border-top:1px solid var(--line)}
+.sh{display:flex;align-items:center;gap:14px;margin-bottom:clamp(36px,5vw,72px);color:var(--ink2)}
+.sh .rule{flex:1;height:1px;background:var(--line);transform-origin:left;transform:scaleX(0);transition:transform 1.2s cubic-bezier(.7,0,.2,1)}
+.sh.in .rule{transform:scaleX(1)}
+.sh b{color:var(--acc);font-weight:500}
+h3.t{font-size:clamp(32px,4.4vw,64px);font-weight:600;letter-spacing:-.04em;line-height:1;margin-bottom:clamp(32px,4vw,56px);max-width:900px}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .9s,transform .9s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+/* manifesto */
+.mani{font-size:clamp(30px,4.6vw,72px);font-weight:500;letter-spacing:-.035em;line-height:1.08;max-width:1240px}
+.mani .w{opacity:.14;transition:opacity .25s}
+.mani .w.on{opacity:1}
+.mani .w.k{color:var(--acc)}
+.mani-foot{display:flex;gap:40px;margin-top:48px;color:var(--ink3);flex-wrap:wrap}
+/* spec sheet */
+.spec{border:1px solid var(--ink);background:rgba(242,244,246,.6)}
+.spec .row{display:grid;grid-template-columns:70px 1fr 1.25fr 150px;align-items:center;border-top:1px solid var(--line);min-height:96px}
+.spec .row>*{padding:14px 20px}
+.spec .row.hd{min-height:0;border-top:0;background:var(--ink);color:var(--paper)}
+.spec .row.hd>*{padding:10px 20px}
+.spec .v{font-family:var(--mono);font-weight:500;font-size:clamp(36px,4.6vw,64px);letter-spacing:-.04em;line-height:1;display:flex;align-items:baseline;gap:12px}
+.spec .v small{font-family:var(--sans);font-size:16px;letter-spacing:0;color:var(--ink2);font-weight:400}
+.spec .p{font-size:17px}
+.spec .note{justify-self:end}
+.tag{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;border:1px dashed var(--ink3);color:var(--ink2);padding:4px 8px}
+.spec .bar{height:2px;background:var(--line);margin-top:10px;position:relative}
+.spec .bar i{position:absolute;inset:0;background:var(--acc);transform-origin:left;transform:scaleX(0);transition:transform 1.4s cubic-bezier(.7,0,.2,1)}
+.spec .row.in .bar i{transform:scaleX(var(--k))}
+/* directions */
+.cards{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--ink)}
+.card{position:relative;border-left:1px solid var(--ink);background:rgba(242,244,246,.55);display:flex;flex-direction:column;transition:background .4s}
+.card:first-child{border-left:0}
+.card .top{display:flex;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--line);color:var(--ink2)}
+.card svg{width:100%;height:auto;display:block;border-bottom:1px solid var(--line)}
+.card svg *{fill:none;stroke:var(--ink);stroke-width:1;vector-effect:non-scaling-stroke}
+.card svg .d{stroke-dasharray:3 3;stroke:var(--ink3)}
+.card svg .a{stroke:var(--acc);stroke-width:1.6}
+.card svg text{fill:var(--ink2);stroke:none;font:500 8px var(--mono);letter-spacing:.04em}
+.card svg .dr{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.6s cubic-bezier(.6,0,.2,1)}
+.card.in svg .dr{stroke-dashoffset:0}
+.card .bd{padding:20px 16px 22px;flex:1;display:flex;flex-direction:column}
+.card h4{font-size:28px;font-weight:600;letter-spacing:-.03em;line-height:1}
+.card .lead{color:var(--acc);font-family:var(--mono);font-size:12px;margin:10px 0 14px}
+.card p{color:var(--ink2);font-size:15px}
+.card:hover{background:var(--paper)}
+.card:hover svg .a{animation:pulse 1.2s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.35}}
+/* process */
+.proc{position:relative;display:grid;grid-template-columns:repeat(5,1fr);gap:0;padding-top:30px}
+.proc .wire{position:absolute;left:10%;right:10%;top:58px;height:1px;background:var(--ink)}
+.proc .wire i{position:absolute;top:-3px;left:0;width:7px;height:7px;background:var(--acc);border-radius:50%;box-shadow:0 0 0 5px rgba(255,74,15,.15);animation:run 5s linear infinite}
+@keyframes run{to{left:100%}}
+.node{position:relative;text-align:center;padding:0 10px}
+.node .ci{width:58px;height:58px;margin:0 auto 22px;border:1px solid var(--ink);border-radius:50%;background:var(--bg);display:grid;place-items:center;font:500 14px var(--mono);position:relative;transition:background .3s,color .3s}
+.node .ci:after{content:"";position:absolute;inset:-7px;border:1px dashed var(--ink3);border-radius:50%;animation:spin 18s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.node:hover .ci{background:var(--acc);color:#fff;border-color:var(--acc)}
+.node h5{font-size:20px;font-weight:600;letter-spacing:-.02em}
+.node p{color:var(--ink2);font-size:14px;margin-top:6px}
+.node .mono{color:var(--ink3);margin-top:12px}
+.node.key .ci{border-color:var(--acc);color:var(--acc)}
+/* cases */
+.cases{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:20px}
+.case{border:1px solid var(--ink);background:rgba(242,244,246,.6);display:flex;flex-direction:column;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.case .art{position:relative;aspect-ratio:4/3;border-bottom:1px solid var(--ink);overflow:hidden;background:linear-gradient(var(--hair) 1px,transparent 1px) 0 0/12px 12px,linear-gradient(90deg,var(--hair) 1px,transparent 1px) 0 0/12px 12px,#EDEFF2}
+.case .art svg{position:absolute;inset:0;width:100%;height:100%;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.case .art svg *{vector-effect:non-scaling-stroke}
+.case:hover .art svg{transform:scale(1.06)}
+.case .art .no{position:absolute;left:12px;top:10px;color:var(--ink2)}
+.case .bd{padding:18px;display:flex;flex-direction:column;gap:10px;flex:1}
+.case h4{font-size:22px;font-weight:600;letter-spacing:-.02em;line-height:1.15}
+.case .meta{color:var(--ink2);font-size:14px}
+.case .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto}
+.case .tags .tag{border-style:solid}
+.case:hover{transform:translateY(-6px)}
+/* clients */
+.clients{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.clients div{padding:34px 16px;text-align:center;border-left:1px solid var(--line);font-weight:600;font-size:clamp(16px,1.6vw,22px);letter-spacing:-.02em;color:var(--ink2);transition:color .3s,background .3s}
+.clients div:first-child{border-left:0}
+.clients div.ph{font-family:var(--mono);font-weight:400;font-size:14px;color:var(--ink3)}
+.clients div:hover{color:var(--ink);background:var(--paper)}
+/* marquee */
+.mq{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0;white-space:nowrap}
+.mq .tr{display:inline-flex;animation:mq 60s linear infinite}
+.mq.r .tr{animation-direction:reverse;animation-duration:75s}
+.mq span{font-size:clamp(28px,3.6vw,52px);font-weight:500;letter-spacing:-.03em;padding:0 22px;display:inline-flex;align-items:center;gap:44px}
+.mq span:after{content:"";width:14px;height:14px;border:1.5px solid var(--acc);border-radius:50%;background:radial-gradient(circle,var(--acc) 2px,transparent 2.5px)}
+.mq.r span{color:transparent;-webkit-text-stroke:1px var(--ink)}
+@keyframes mq{to{transform:translateX(-50%)}}
+/* cta */
+.cta{text-align:left}
+.cta h3{font-size:clamp(46px,8.4vw,140px);font-weight:600;letter-spacing:-.05em;line-height:.92}
+.cta h3 span{display:block;color:var(--ink3)}
+.dim{display:flex;align-items:center;gap:10px;margin:34px 0 44px;color:var(--ink2);max-width:760px}
+.dim:before,.dim:after{content:"";flex:1;height:1px;background:var(--ink2)}
+.dim b{font-weight:500}
+.dim i{width:1px;height:14px;background:var(--ink2)}
+footer{padding:28px var(--gut);border-top:1px solid var(--ink);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;color:var(--ink2)}
+footer b{color:var(--ink);font-weight:700}
+@media (max-width:1100px){.nav nav{display:none}.cards{grid-template-columns:1fr 1fr}.card:nth-child(3){border-left:0}.card:nth-child(n+3){border-top:1px solid var(--ink)}.cases{grid-template-columns:1fr 1fr}.cases .case:first-child{grid-column:1/-1}}
+@media (max-width:720px){
+ .brand small{display:none}.nav .btn{height:36px;padding:0 12px;font-size:13px}.nav .btn i{display:none}
+ #hero{height:430vh}
+ .copy{top:84px;transform:none;max-width:none;right:var(--gut)}
+ .eyebrow{margin-bottom:12px}
+ h1{font-size:44px}
+ .sub{margin:14px 0 18px;font-size:15px}
+ .btn{height:46px;padding:0 16px;font-size:14px}
+ .hud{top:auto;bottom:150px;right:var(--gut);min-width:0;font-size:9.5px}
+ .hud div{padding:5px 8px;gap:10px}.hud .hide-m{display:none}
+ .stamp,.hint{display:none}
+ .cap{bottom:22px;right:var(--gut)}
+ .cap .ticks span{flex:1}
+ .cap h2{font-size:24px}.cap p{font-size:14px}
+ .callout{font-size:9.5px;padding:4px 6px}.callout b{font-size:11px}
+ .spec .row{grid-template-columns:40px 1fr;min-height:0}
+ .spec .row>*{padding:12px 12px}
+ .spec .row .p{grid-column:2}.spec .row .v{grid-column:1/-1;padding-top:0}.spec .row .note{grid-column:1/-1;justify-self:start;padding-top:0}
+ .spec .row.hd{display:none}
+ .cards,.cases{grid-template-columns:1fr}.card{border-left:0!important}.card+.card{border-top:1px solid var(--ink)}
+ .proc{grid-template-columns:1fr;gap:28px;padding-top:0}
+ .proc .wire{left:29px;right:auto;top:10px;bottom:10px;width:1px;height:auto}
+ .proc .wire i{left:-3px;animation-name:runv}
+ .node{display:grid;grid-template-columns:58px 1fr;gap:0 18px;text-align:left;padding:0}
+ .node .ci{margin:0;grid-row:span 3}
+ .clients{grid-template-columns:1fr 1fr}.clients div{border-left:0;border-top:1px solid var(--line);padding:22px 10px}.clients div:nth-child(even){border-left:1px solid var(--line)}
+ .clients div:nth-child(-n+2){border-top:0}.clients div:last-child{grid-column:1/-1;border-left:0}
+}
+@keyframes runv{from{top:0}to{top:100%}}
+@media (prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition-duration:.01ms!important}html{scroll-behavior:auto}.rv{opacity:1;transform:none}.mani .w{opacity:1}}
+</style>
+</head>
+<body>
+<header class="nav">
+ <a class="brand" href="#top" aria-label="Катализ">
+  <svg viewBox="0 0 28 28" fill="none" stroke="#11151B" stroke-width="1.4"><circle cx="14" cy="14" r="9"/><circle cx="14" cy="14" r="3" stroke="#FF4A0F" stroke-width="2"/><path d="M14 1v7M14 20v7M1 14h7M20 14h7"/></svg>
+  <span><b>Катализ</b><small>студия Центра Бизнес Технологий</small></span>
+ </a>
+ <nav><a href="#cases">Работы</a><a href="#dirs">Направления</a><a href="#process">Как мы работаем</a><a href="#clients">Клиенты</a><a href="#cta">Связаться</a></nav>
+ <a class="btn pri" href="#cta">Обсудить проект <i>→</i></a>
+</header>
+
+<main id="top">
+<section id="hero">
+ <div class="stage">
+  <canvas id="gl" aria-label="Трёхмерная модель механизма, разбираемая при прокрутке"></canvas>
+  <svg id="ov" aria-hidden="true"></svg>
+  <div id="labels" aria-hidden="true"></div>
+  <div class="copy" id="copy">
+   <div class="eyebrow mono">Студия контента полного цикла</div>
+   <h1>Точность в&nbsp;каждой <em>детали</em></h1>
+   <p class="sub">От листовки до сложного 3D. ИИ-конвейер ускоряет производство в 2–4 раза — а освободившееся время мы тратим на мелочи.</p>
+   <div class="ctas">
+    <a class="btn pri" href="#cta">Обсудить проект <i>→</i><span class="tol">срок · от 5 дней</span></a>
+    <a class="btn sec" href="#cases">Смотреть работы <i>↓</i></a>
+   </div>
+  </div>
+  <div class="hud" id="hud">
+   <div class="cnt"><span>Деталей</span><b id="hCnt">0</b></div>
+   <div><span>Разнесение</span><b id="hEx">0.0 мм</b></div>
+   <div class="hide-m"><span>Поворот</span><b id="hRot">000°</b></div>
+   <div class="hide-m"><span>Сечение</span><b id="hSec">—</b></div>
+  </div>
+  <div class="cap" id="cap">
+   <div class="ticks"><span><i></i></span><span><i></i></span><span><i></i></span><span><i></i></span><span><i></i></span></div>
+   <div class="sw" id="capSw"><div class="n mono" id="capN">Этап 01 / 05 · Материя</div><h2 id="capT">Из ничего</h2></div>
+  </div>
+  <div class="stamp" id="stamp"><span>Разраб.</span><span class="big">Катализ</span><span>Лист 1</span><span>Узел</span><span>Привод оптики</span><span>М 1:2</span></div>
+  <div class="hint mono" id="hint">Прокрутите — разберём</div>
+ </div>
+</section>
+
+<section class="s" id="manifest">
+ <div class="sh mono"><b>02</b> Манифест<span class="rule"></span>Лист 02</div>
+ <p class="mani" id="mani">Мы делаем любой контент — от поста до 3D-моделирования. Машина берёт рутину. Люди — идею, вкус и точность.</p>
+ <div class="mani-foot mono"><span>[ ИИ ] → рутина</span><span>[ Человек ] → идея · вкус · точность</span></div>
+</section>
+
+<section class="s" id="nums">
+ <div class="sh mono"><b>03</b> Технические характеристики<span class="rule"></span>Спецификация</div>
+ <div class="spec">
+  <div class="row hd mono"><span>Поз.</span><span>Параметр</span><span>Значение</span><span style="justify-self:end">Прим.</span></div>
+  <div class="row rv" style="--k:.75"><span class="mono">01</span><span class="p">Скорость производства<div class="bar"><i></i></div></span><span class="v"><span>2–4×</span><small>быстрее</small></span><span class="note"><span class="tag">ориентир</span></span></div>
+  <div class="row rv" style="--k:.9"><span class="mono">02</span><span class="p">Варианты концепции<div class="bar"><i></i></div></span><span class="v"><span data-n="100">0</span>+<small>вариантов концепции за день</small></span><span class="note"><span class="tag">ориентир</span></span></div>
+  <div class="row rv" style="--k:.45"><span class="mono">03</span><span class="p">Опыт<div class="bar"><i></i></div></span><span class="v"><span data-n="9">0</span><small>лет в продакшне</small></span><span class="note"><span class="tag">ориентир</span></span></div>
+  <div class="row rv" style="--k:1"><span class="mono">04</span><span class="p">Портфель<div class="bar"><i></i></div></span><span class="v"><span data-n="800">0</span>+<small>проектов</small></span><span class="note"><span class="tag">ориентир</span></span></div>
+ </div>
+</section>
+
+<section class="s" id="dirs">
+ <div class="sh mono"><b>04</b> Направления<span class="rule"></span>4 узла</div>
+ <h3 class="t rv">Четыре направления — одна точность.</h3>
+ <div class="cards">
+  <article class="card rv">
+   <div class="top mono"><span>Дет. 01</span><span>A4 · 210×297</span></div>
+   <svg viewBox="0 0 240 170"><rect class="dr" pathLength="1" x="78" y="22" width="84" height="118"/><path class="dr" pathLength="1" d="M162 140A84 84 0 0 0 78 56M78 56h84M130 56v84M130 108h32"/><path class="a dr" pathLength="1" d="M130 108A32 32 0 0 1 162 76"/><path class="d" d="M78 150v8M162 150v8M78 154h84M60 22h-8M60 140h-8M56 22v118"/><text x="110" y="166">210</text><text x="34" y="84">297</text><circle class="a" cx="146" cy="40" r="5"/></svg>
+   <div class="bd"><h4>Визуал</h4><div class="lead">— всё, что смотрят.</div><p>Айдентика, ключевые визуалы, упаковка, карточки маркетплейсов, полиграфия, презентации.</p></div>
+  </article>
+  <article class="card rv">
+   <div class="top mono"><span>Дет. 02</span><span>XYZ · 24 fps</span></div>
+   <svg viewBox="0 0 240 170"><path class="dr" pathLength="1" d="M120 40l40 22v46l-40 22-40-22V62zM80 62l40 22 40-22M120 84v46"/><path class="d" d="M120 84l60 34M120 84l-60 34M120 84V20"/><path class="a dr" pathLength="1" d="M58 64a70 40 0 0 1 124 0"/><path class="a" d="M176 56l6 8-10 1"/><text x="184" y="124">X</text><text x="50" y="124">Y</text><text x="124" y="18">Z</text></svg>
+   <div class="bd"><h4>Движение и 3D</h4><div class="lead">— всё, что движется.</div><p>Ролики, моушн, ИИ-видео без съёмки, 3D-модели, механизмы, анатомия.</p></div>
+  </article>
+  <article class="card rv">
+   <div class="top mono"><span>Дет. 03</span><span>Hit area 44</span></div>
+   <svg viewBox="0 0 240 170"><rect class="dr" pathLength="1" x="56" y="62" width="128" height="44" rx="4"/><path class="dr" pathLength="1" d="M76 84h60"/><path class="d" d="M196 62h10M196 106h10M201 62v44M56 52v-8M184 52v-8M56 48h128"/><text x="208" y="88">44</text><text x="110" y="42">128</text><circle class="a" cx="150" cy="96" r="10"/><circle class="a dr" pathLength="1" cx="150" cy="96" r="20"/><path d="M150 96l0 30 8-8 6 13 5-2-6-13 11 0z" style="fill:#F2F4F6"/></svg>
+   <div class="bd"><h4>Интерактив</h4><div class="lead">— всё, что нажимают.</div><p>Курсы SCORM, тренажёры, ИИ-диалоги, игры, лендинги, боты.</p></div>
+  </article>
+  <article class="card rv">
+   <div class="top mono"><span>Дет. 04</span><span>48 кГц · 24 бит</span></div>
+   <svg viewBox="0 0 240 170"><path class="dr" pathLength="1" d="M70 132c-2-24 -6-34-12-42-6-30 14-56 44-56 26 0 42 18 42 42 0 6 6 14 8 20l-8 2v14c0 6-6 8-16 8v12"/><circle class="d" cx="98" cy="74" r="40"/><path class="a" d="M160 85v0M168 75v20M176 64v42M184 78v14M192 56v58M200 70v30M208 80v10M216 74v22"/><text x="166" y="132">~ ГОЛОС</text></svg>
+   <div class="bd"><h4>Цифровые люди</h4><div class="lead">— все, кто говорит.</div><p>ИИ-озвучка, клон голоса, аватары, видеолекции, дубляж.</p></div>
+  </article>
+ </div>
+</section>
+
+<section class="s" id="process">
+ <div class="sh mono"><b>05</b> Как мы работаем<span class="rule"></span>Схема процесса</div>
+ <h3 class="t rv">Конвейер из пяти операций.</h3>
+ <div class="proc">
+  <div class="wire"><i></i></div>
+  <div class="node rv"><div class="ci">01</div><h5>Бриф</h5><div class="mono">Оп. 010 · вход</div></div>
+  <div class="node rv key"><div class="ci">02</div><h5>Концепция</h5><p>100+ направлений за день</p><div class="mono">Оп. 020 · ИИ</div></div>
+  <div class="node rv"><div class="ci">03</div><h5>Продакшн</h5><div class="mono">Оп. 030</div></div>
+  <div class="node rv key"><div class="ci">04</div><h5>Контроль точности</h5><div class="mono">Оп. 040 · ± 0.01</div></div>
+  <div class="node rv"><div class="ci">05</div><h5>Выдача во все каналы</h5><div class="mono">Оп. 050 · выход</div></div>
+ </div>
+</section>
+
+<section class="s" id="cases">
+ <div class="sh mono"><b>06</b> Работы<span class="rule"></span>3 из 800+</div>
+ <div class="cases">
+  <article class="case rv">
+   <div class="art"><span class="no mono">Кейс 01 · 00:90</span>
+    <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice"><g stroke="#11151B" fill="none" stroke-width="1.2"><path d="M120 150l50-30 55 22 48-34 50 18M170 120l-8-55M225 142l8 62 52 22M273 108l18-50M233 204l-50 30"/></g><g fill="#F2F4F6" stroke="#11151B" stroke-width="1.2"><circle cx="120" cy="150" r="14"/><circle cx="170" cy="120" r="20"/><circle cx="162" cy="65" r="10"/><circle cx="273" cy="108" r="18"/><circle cx="291" cy="58" r="9"/><circle cx="323" cy="126" r="12"/><circle cx="233" cy="204" r="14"/><circle cx="285" cy="226" r="10"/><circle cx="183" cy="234" r="9"/></g><circle cx="225" cy="142" r="24" fill="#FF4A0F"/><circle cx="225" cy="142" r="40" fill="none" stroke="#FF4A0F" stroke-dasharray="3 4"/><path d="M40 270h320" stroke="#11151B"/><path d="M40 270h180" stroke="#FF4A0F" stroke-width="3"/><g font-family="JetBrains Mono" font-size="10" fill="#4B5361"><text x="40" y="288">0 с</text><text x="336" y="288">90 с</text></g></svg></div>
+   <div class="bd"><h4>«Механизм действия препарата»</h4><div class="meta">3D-анимация, 90 сек</div><div class="tags"><span class="tag">3D</span><span class="tag">Медицина</span></div></div>
+  </article>
+  <article class="case rv">
+   <div class="art"><span class="no mono">Кейс 02 · 140 дет.</span>
+    <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice"><g fill="#F2F4F6" stroke="#11151B" stroke-width="1.2"><path d="M110 210l60-34 60 34-60 34z"/><path d="M110 210v14l60 34 60-34v-14"/><path d="M140 150l40-23 40 23-40 23z"/><path d="M140 150v10l40 23 40-23v-10"/><path d="M160 98l30-17 30 17-30 17z" fill="#FF4A0F"/><path d="M160 98v8l30 17 30-17v-8"/></g><g stroke="#11151B" stroke-dasharray="3 4" fill="none"><path d="M180 66v-30M180 173v20M180 115v16"/><path d="M262 98h60M262 150h60M262 214h60"/></g><g font-family="JetBrains Mono" font-size="10" fill="#4B5361"><text x="326" y="102">поз. 3</text><text x="326" y="154">поз. 2</text><text x="326" y="218">поз. 1</text></g></svg></div>
+   <div class="bd"><h4>«Разборка промышленного узла»</h4><div class="meta">интерактивная 3D-модель, 140 деталей</div><div class="tags"><span class="tag">3D</span><span class="tag">Инженерия</span></div></div>
+  </article>
+  <article class="case rv">
+   <div class="art"><span class="no mono">Кейс 03 · 5 дней</span>
+    <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice"><g stroke="#11151B" stroke-width="1.2"><rect x="70" y="60" width="120" height="120" fill="#11151B"/><rect x="200" y="60" width="56" height="56" fill="#FF4A0F"/><rect x="266" y="60" width="56" height="56" fill="#F2F4F6"/><rect x="200" y="124" width="122" height="56" fill="#E7EAEE"/><rect x="70" y="190" width="252" height="50" fill="#F2F4F6"/></g><path d="M108 90v60M108 120l34-30M120 110l26 40" stroke="#F2F4F6" stroke-width="7" fill="none"/><g font-family="JetBrains Mono" font-size="10" fill="#4B5361"><text x="82" y="219">Д1 айдентика · Д2 упаковка · Д4 ролик</text></g></svg></div>
+   <div class="bd"><h4>«Запуск бренда за 5 дней»</h4><div class="meta">айдентика, упаковка, карточки, ролик</div><div class="tags"><span class="tag">Визуал</span></div></div>
+  </article>
+ </div>
+</section>
+
+<section class="s" id="clients" style="padding-bottom:0">
+ <div class="sh mono"><b>07</b> Клиенты<span class="rule"></span>Реестр</div>
+ <div class="clients rv"><div>ЦентрФарма</div><div>Омнифарма</div><div class="ph">[Клиент]</div><div class="ph">[Аптечная сеть]</div><div class="ph">[Фармпроизводитель]</div></div>
+ <div style="height:clamp(60px,8vw,110px)"></div>
+ <div class="mq" aria-label="Форматы"><div class="tr" id="mq1"></div></div>
+ <div class="mq r" aria-hidden="true"><div class="tr" id="mq2"></div></div>
+</section>
+
+<section class="s cta" id="cta">
+ <div class="sh mono"><b>08</b> Связаться<span class="rule"></span>Финальная сборка</div>
+ <h3 class="rv">Есть задача?<span>Соберём за дни, а не месяцы.</span></h3>
+ <div class="dim mono rv"><i></i><b>дни</b>&nbsp;≪&nbsp;месяцы<i></i></div>
+ <a class="btn pri rv" href="mailto:hello@example.com" style="height:64px;padding:0 30px;font-size:17px">Обсудить проект <i>→</i><span class="tol">ответим в течение дня</span></a>
+</section>
+</main>
+<footer><span><b>Катализ</b> — студия Центра Бизнес Технологий</span><span class="mono">Вариант 02 · Exploded view · Лист 08/08</span></footer>
+
+<script>
+(function(){
+ const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ // marquee
+ const F='Брендбуки · Ключевые визуалы · Упаковка · Карточки WB/OZON · Полиграфия · Презентации · Маскоты · Ролики · ИИ-видео · 3D-модели · Механизмы · Молекулы · Анатомия · AR · SCORM-курсы · Тренажёры · ИИ-диалоги · HTML5-игры · Лендинги · Боты · Стенды · Озвучка · Аватары · Дубляж'.split(' · ');
+ const html=a=>a.map(x=>'<span>'+x+'</span>').join('');
+ document.getElementById('mq1').innerHTML=html(F)+html(F);
+ const F2=F.slice(12).concat(F.slice(0,12));document.getElementById('mq2').innerHTML=html(F2)+html(F2);
+ // manifesto words
+ const m=document.getElementById('mani');const keys=['рутину.','идею,','вкус','точность.'];
+ m.innerHTML=m.textContent.split(' ').map(w=>'<span class="w'+(keys.includes(w)?' k':'')+'">'+w+'</span>').join(' ');
+ const ws=[...m.querySelectorAll('.w')];
+ // reveal
+ const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const t=e.target;t.classList.add('in');io.unobserve(t);
+  t.querySelectorAll('[data-n]').forEach(n=>{const N=+n.dataset.n;if(RM){n.textContent=N;return}const t0=performance.now();(function f(now){const k=Math.min(1,(now-t0)/1400);n.textContent=Math.round(N*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(f)})(t0)})}),{threshold:.2});
+ document.querySelectorAll('.rv,.sh').forEach(e=>io.observe(e));
+ function onScroll(){const r=m.getBoundingClientRect(),vh=innerHeight;const k=Math.min(1,Math.max(0,(vh*.85-r.top)/(r.height+vh*.35)));const n=Math.round(k*ws.length);ws.forEach((w,i)=>w.classList.toggle('on',i<n||RM))}
+ addEventListener('scroll',onScroll,{passive:true});onScroll();
+})();
+</script>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $=id=>document.getElementById(id);
+const canvas=$('gl'),hero=$('hero'),ov=$('ov'),labelsEl=$('labels');
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true,powerPreference:'high-performance'});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;
+renderer.localClippingEnabled=true;
+const scene=new THREE.Scene();
+const pm=new THREE.PMREMGenerator(renderer);scene.environment=pm.fromScene(new RoomEnvironment(renderer),.04).texture;
+const camera=new THREE.PerspectiveCamera(30,1,.1,200);
+const key=new THREE.DirectionalLight(0xffffff,1.6);key.position.set(6,9,8);scene.add(key);
+const rim=new THREE.DirectionalLight(0xffe2d6,.8);rim.position.set(-8,2,-6);scene.add(rim);
+scene.add(new THREE.HemisphereLight(0xffffff,0x8a94a3,.5));
+const root=new THREE.Group(),spin=new THREE.Group();scene.add(root);root.add(spin);
+// clipping (half-section)
+const secLocal=new THREE.Plane(new THREE.Vector3(0,0,-1),9),secWorld=new THREE.Plane();
+const clip=[secWorld];
+const std=(c,m,r,o={})=>new THREE.MeshStandardMaterial(Object.assign({color:c,metalness:m,roughness:r,side:THREE.DoubleSide},o));
+const M={alu:std(0xc3c9d1,.85,.34,{clippingPlanes:clip}),cap:std(0x59606a,.75,.36,{clippingPlanes:clip}),motor:std(0x22262c,.55,.48,{clippingPlanes:clip}),
+ steel:std(0xb9c0c8,1,.2),dark:std(0x5a616b,.9,.3),black:std(0x1b1e23,.7,.32),acc:std(0xff4a0f,.25,.38),accC:std(0xff4a0f,.25,.38,{clippingPlanes:clip}),
+ ball:std(0xe8ecf0,1,.08),glass:new THREE.MeshPhysicalMaterial({color:0xbfd8ff,metalness:0,roughness:.04,transparent:true,opacity:.42,clearcoat:1,side:THREE.DoubleSide})};
+const LM=new THREE.LineBasicMaterial({color:0x11151b,transparent:true,opacity:.32}),LMc=LM.clone();LMc.clippingPlanes=clip;
+const ax=g=>(g.rotateZ(Math.PI/2),g); // Y->X axis
+const cyl=(r,l,s=40)=>ax(new THREE.CylinderGeometry(r,r,l,s));
+function circ(p,x,y,r){p.absarc(x,y,r,0,Math.PI*2,true);return p}
+function extr(shape,d,seg=48){const g=new THREE.ExtrudeGeometry(shape,{depth:d,bevelEnabled:true,bevelThickness:.012,bevelSize:.01,bevelSegments:1,curveSegments:seg});g.translate(0,0,-d/2);g.rotateY(Math.PI/2);return g}
+function ring(ro,ri,d,holes=[]){const s=new THREE.Shape();s.absarc(0,0,ro,0,Math.PI*2,false);s.holes.push(circ(new THREE.Path(),0,0,ri));holes.forEach(h=>s.holes.push(circ(new THREE.Path(),h[0],h[1],h[2])));return extr(s,d,64)}
+function gear(Z,m,w,hole,lite=0){const s=new THREE.Shape(),rp=m*Z/2,ra=rp+m,rf=rp-1.25*m,t=Math.PI*2/Z;
+ for(let i=0;i<Z;i++){const a=i*t;[[a-.5*t,rf],[a-.28*t,rf],[a-.2*t,rp],[a-.12*t,ra],[a+.12*t,ra],[a+.2*t,rp],[a+.28*t,rf]].forEach(([g,r],j)=>{const x=Math.cos(g)*r,y=Math.sin(g)*r;i+j===0?s.moveTo(x,y):s.lineTo(x,y)})}
+ s.closePath();s.holes.push(circ(new THREE.Path(),0,0,hole));
+ for(let k=0;k<lite;k++){const a=k/lite*Math.PI*2;s.holes.push(circ(new THREE.Path(),Math.cos(a)*rp*.56,Math.sin(a)*rp*.56,rp*.2))}
+ return extr(s,w,12)}
+const parts=[];
+function mesh(geo,mat,x=0,y=0,z=0){const m=new THREE.Mesh(geo,mat);m.position.set(x,y,z);const e=new THREE.LineSegments(new THREE.EdgesGeometry(geo,28),mat.clippingPlanes?LMc:LM);m.add(e);return m}
+function part(name,meshes,home,off,o={}){const g=new THREE.Group();meshes.forEach(m=>g.add(m));g.position.copy(home);spin.add(g);const p=Object.assign({name,g,home:home.clone(),off,spinW:0},o);parts.push(p);return p}
+const V=(x,y,z)=>new THREE.Vector3(x,y,z);
+// --- housing (cut-away), ribs, feet
+const R=1.86,r=1.72,L=3.2,a0=200*Math.PI/180,a1=(70+360)*Math.PI/180;
+function sector(Ro,Ri,d){const s=new THREE.Shape();s.absarc(0,0,Ro,a0,a1,false);s.absarc(0,0,Ri,a1,a0,true);s.closePath();return extr(s,d,72)}
+const hous=part('housing',[mesh(sector(R,r,L),M.alu),mesh(sector(R+.1,r,.1),M.alu,-.8),mesh(sector(R+.1,r,.1),M.alu,0),mesh(sector(R+.1,r,.1),M.alu,.8),mesh(new THREE.BoxGeometry(2.8,.16,1.5),M.alu,0,-R-.06,0)],V(0,0,0),V(0,2.5,0));
+// --- caps with bolt holes
+const BR=1.79,bh=[];for(let i=0;i<6;i++){const a=(i*60+30)*Math.PI/180;bh.push([Math.cos(a)*BR,Math.sin(a)*BR,.075])}
+for(const sd of[-1,1]){part(sd<0?'capL':'capR',[mesh(ring(1.98,.58,.26,bh),M.cap),mesh(ring(.86,.58,.18),M.cap,sd*.2)],V(sd*1.75,0,0),V(sd*1.65,0,0));
+ for(let i=0;i<6;i++){const a=(i*60+30)*Math.PI/180,y=Math.sin(a)*BR,z=-Math.cos(a)*BR;
+  part('bolt'+(sd<0?'L':'R')+i,[mesh(cyl(.12,.1,6),M.black),mesh(cyl(.055,.52,12),M.dark,-sd*.3)],V(sd*1.955,y,z),V(sd*2.2,y*.22,z*.22))}}
+// --- shafts & gears
+const m_=.045;
+part('shaftIn',[mesh(cyl(.16,2.7),M.steel)],V(-1.35,0,0),V(-1,0,0),{spinW:1});
+part('shaftOut',[mesh(cyl(.16,2.5),M.steel)],V(1.25,0,0),V(1,0,0),{spinW:3});
+part('shaftC',[mesh(cyl(.12,3.1),M.steel)],V(0,-1.08,0),V(0,-2.3,0),{spinW:-3});
+part('g36',[mesh(gear(36,m_,.34,.17,5),M.steel),mesh(cyl(.3,.5),M.steel)],V(-.7,0,0),V(-.5,0,.0),{spinW:1});
+part('g24',[mesh(gear(24,m_,.3,.17,0),M.acc),mesh(cyl(.26,.46),M.acc)],V(.6,0,0),V(.55,0,0),{spinW:3,ph:Math.PI/24});
+part('g12',[mesh(gear(12,m_,.4,.13),M.steel)],V(-.7,-1.08,0),V(-.35,-2.3,0),{spinW:-3,ph:Math.PI/12});
+part('g24c',[mesh(gear(24,m_,.3,.13,0),M.dark)],V(.6,-1.08,0),V(.35,-2.3,0),{spinW:-3});
+// --- bearings (outer, inner, 8 balls)
+for(const sd of[-1,1]){const x=sd*1.75,dx=sd*.85;
+ part('brgO'+sd,[mesh(ring(.55,.44,.22),M.steel)],V(x,0,0),V(dx,0,0));
+ part('brgI'+sd,[mesh(ring(.3,.17,.22),M.steel)],V(x,0,0),V(dx,0,0),{spinW:sd<0?1:3});
+ for(let i=0;i<8;i++){const a=i/8*Math.PI*2,y=Math.cos(a)*.37,z=Math.sin(a)*.37;part('ball',[new THREE.Mesh(new THREE.SphereGeometry(.072,14,10),M.ball)],V(x,y,z),V(dx,y*1.1,z*1.1))}}
+// --- motor, coupling, rings, optics
+const motorRibs=[];for(let i=0;i<7;i++)motorRibs.push(mesh(ring(1.0,.8,.05),M.motor,-.55+i*.15));
+part('motor',[mesh(cyl(.95,1.6,64),M.motor),...motorRibs,mesh(cyl(.6,.12,48),M.accC,-.86),mesh(cyl(.4,.14,48),M.cap,.84)],V(-3.0,0,0),V(-3.6,0,0));
+part('coupling',[mesh(cyl(.3,.32,6),M.dark)],V(-2.42,0,0),V(-2.8,0,0),{spinW:1});
+part('ringL',[new THREE.Mesh(new THREE.TorusGeometry(.2,.03,8,32).rotateY(Math.PI/2),M.black)],V(-2.1,0,0),V(-2.5,0,0));
+part('ringR',[new THREE.Mesh(new THREE.TorusGeometry(.2,.03,8,32).rotateY(Math.PI/2),M.black)],V(2.1,0,0),V(2.5,0,0));
+part('barrel',[mesh(ring(.92,.7,.8,[]),M.cap),mesh(ring(.97,.7,.12),M.accC,.38)],V(2.6,0,0),V(2.9,0,0));
+const lensG=new THREE.SphereGeometry(1.25,48,16,0,Math.PI*2,0,.62);lensG.rotateZ(-Math.PI/2);lensG.translate(-1.25*Math.cos(.62),0,0);
+part('lens',[new THREE.Mesh(lensG,M.glass),mesh(ring(.78,.72,.06),M.black)],V(3.0,0,0),V(3.8,0,0));
+const N=parts.length;
+const maxOff=Math.max(...parts.map(p=>p.off.length()));
+parts.forEach((p,i)=>{p.d=1-p.off.length()/maxOff;p.o=i/N});
+// --- point cloud: "matter" sampled from part surfaces
+spin.updateMatrixWorld(true);
+const pool=[];spin.traverse(o=>{if(o.isMesh){const a=o.geometry.attributes.position;const w=o.matrixWorld;for(let i=0;i<a.count;i+=3)pool.push(new THREE.Vector3().fromBufferAttribute(a,i).applyMatrix4(w))}});
+const NP=innerWidth<720?3200:6000,tgt=new Float32Array(NP*3),cld=new Float32Array(NP*3),pos=new Float32Array(NP*3),col=new Float32Array(NP*3),dl=new Float32Array(NP);
+const cInk=new THREE.Color(0x1d2430),cAcc=new THREE.Color(0xff4a0f);
+for(let i=0;i<NP;i++){const v=pool[(Math.random()*pool.length)|0];tgt.set([v.x,v.y,v.z],i*3);
+ const u=Math.random()*Math.PI*2,q=Math.acos(2*Math.random()-1),rr=2.6*Math.pow(Math.random(),.6)+.3*Math.random();
+ cld.set([Math.sin(q)*Math.cos(u)*rr*1.5,Math.cos(q)*rr*.9,Math.sin(q)*Math.sin(u)*rr],i*3);
+ const c=Math.random()<.05?cAcc:cInk;col.set([c.r,c.g,c.b],i*3);dl[i]=Math.random()*.3}
+const pg=new THREE.BufferGeometry();pg.setAttribute('position',new THREE.BufferAttribute(pos,3));pg.setAttribute('color',new THREE.BufferAttribute(col,3));
+const pmat=new THREE.PointsMaterial({size:.03,vertexColors:true,transparent:true,depthWrite:false});
+const cloud=new THREE.Points(pg,pmat);spin.add(cloud);
+// --- "molecule" bonds between major parts
+const major=parts.filter(p=>p.name!=='ball'&&!p.name.startsWith('bolt'));const pairs=[];
+major.forEach((a,i)=>{major.map((b,j)=>[j,a.home.distanceTo(b.home)]).filter(x=>x[0]!==i).sort((x,y)=>x[1]-y[1]).slice(0,2).forEach(([j])=>{if(!pairs.some(p=>p[0]===j&&p[1]===i))pairs.push([i,j])})});
+const bg=new THREE.BufferGeometry();bg.setAttribute('position',new THREE.BufferAttribute(new Float32Array(pairs.length*6),3));
+const bonds=new THREE.LineSegments(bg,new THREE.LineBasicMaterial({color:0xff4a0f,transparent:true,depthTest:false}));spin.add(bonds);
+const ng=new THREE.BufferGeometry();ng.setAttribute('position',new THREE.BufferAttribute(new Float32Array(major.length*3),3));
+const nodes=new THREE.Points(ng,new THREE.PointsMaterial({color:0xff4a0f,size:.16,transparent:true,depthTest:false}));spin.add(nodes);
+// --- section plane frame
+const fr=new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints([V(-4.2,-2.3,0),V(3.8,-2.3,0),V(3.8,-2.3,0),V(3.8,2.3,0),V(3.8,2.3,0),V(-4.2,2.3,0),V(-4.2,2.3,0),V(-4.2,-2.3,0),V(-4.6,0,0),V(4.2,0,0)]),new THREE.LineBasicMaterial({color:0xff4a0f,transparent:true}));spin.add(fr);
+// --- callouts
+const CO=[['g24','Шестерня Z=24','m 0.45 · допуск 0.01 мм',-1],['g12','Шестерня Z=12','сталь 40Х · HRC 52',1],['brgO1','Подшипник 608-2RS','8 тел качения · Ø22',-1],['housing','Корпус','Al 6061-T6 · анодирование',-1],['boltR2','Болт M3×12','×12 · момент 1.2 Н·м',1],['lens','Линза Ø32','R 48 мм · просветление',-1],['motor','Двигатель BLDC','24 В · 4000 об/мин',1],['g36','Шестерня Z=36','облегчённая · 5 окон',1]];
+const NS='http://www.w3.org/2000/svg';const mk=(t,c)=>{const e=document.createElementNS(NS,t);if(c)e.setAttribute('class',c);ov.appendChild(e);return e};
+const callouts=CO.map(([n,t,s,up],i)=>{const el=document.createElement('div');el.className='callout';el.innerHTML='<b>'+t+'</b><span>'+s+'</span>';labelsEl.appendChild(el);return{p:parts.find(p=>p.name===n),el,up,path:mk('path'),dot:mk('path','a')}});
+const dimP=mk('path'),dimA=mk('path','a'),dimT=mk('text');
+// --- state
+let W=1,H=1,portrait=false,ps=0,mx=0,my=0,smx=0,smy=0,last=performance.now(),time=0,visible=true;
+function resize(){W=innerWidth;H=canvas.clientHeight||innerHeight;portrait=W/H<.85;renderer.setSize(W,H,false);camera.aspect=W/H;ov.setAttribute('viewBox',`0 0 ${W} ${H}`);root.rotation.z=portrait?Math.PI/2:0}
+addEventListener('resize',resize);resize();
+addEventListener('pointermove',e=>{mx=e.clientX/W-.5;my=e.clientY/H-.5},{passive:true});
+new IntersectionObserver(e=>visible=e[0].isIntersecting).observe(hero);
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x)),ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2,sm=t=>{t=cl(t);return t*t*(3-2*t)};
+const STAGES=[['Материя','Из ничего'],['Молекула','Наука: молекулы, механизмы действия'],['Сердце','Медицина: анатомия с точностью до сосуда'],['Механизм','Инженерия: сборка и разборка любой сложности'],['Собранная форма','Ваш продукт']];
+const ticks=[...document.querySelectorAll('.cap .ticks i')];let curStage=-1;
+function setStage(s){if(s===curStage)return;curStage=s;const sw=$('capSw');sw.classList.add('out');setTimeout(()=>{$('capN').textContent='Этап 0'+(s+1)+' / 05 · '+STAGES[s][0];$('capT').textContent=STAGES[s][1];sw.classList.remove('out')},RM?0:220)}
+const tv=new THREE.Vector3(),tv2=new THREE.Vector3();
+function proj(v){v.project(camera);return[(v.x*.5+.5)*W,(-v.y*.5+.5)*H]}
+function frame(now){requestAnimationFrame(frame);const dt=Math.min(.05,(now-last)/1000),last0=last;last=now;if(!visible)return;if(!RM)time+=dt;
+ const rect=hero.getBoundingClientRect(),p=cl(-rect.top/(rect.height-H));ps+=RM?p-ps:(p-ps)*(1-Math.exp(-(now-last0)/1000*7));const P=ps;
+ smx+=(mx-smx)*.05;smy+=(my-smy)*.05;
+ // phases
+ const f=ease(cl(P/.14));let e=0,bond=0,cut=0;
+ if(P>.16&&P<.34){const t=(P-.16)/.18;e=.14*Math.sin(Math.PI*t);bond=sm(t*5)*sm((1-t)*5)}
+ else if(P>=.34&&P<.52){const t=(P-.34)/.18;cut=sm(t/.35)*(1-sm((t-.82)/.18))}
+ else if(P>=.52&&P<.8)e=ease(cl((P-.52)/.17));else if(P>=.8)e=1-ease(cl((P-.8)/.15));
+ setStage(P<.16?0:P<.34?1:P<.52?2:P<.8?3:4);
+ ticks.forEach((t,i)=>{const a=[0,.16,.34,.52,.8,1];t.style.transform='scaleX('+cl((P-a[i])/(a[i+1]-a[i]))+')'});
+ // parts
+ let vis=0;parts.forEach(p=>{const s=f>=1?1:ease(cl((f-.45-p.o*.35)/.2));if(s>.5)vis++;p.g.scale.setScalar(Math.max(.001,s));
+  const k=ease(cl(e*1.5-p.d*.5));p.g.position.copy(p.home).addScaledVector(p.off,k);
+  p.g.rotation.x=(p.ph||0)+p.spinW*time*.5});
+ // cloud
+ cloud.visible=f<1;if(cloud.visible){pmat.opacity=1-sm((f-.7)/.3);const sw=time*.15;for(let i=0;i<NP;i++){const k=ease(cl((f-dl[i])/.55)),j=i*3,cx=cld[j],cz=cld[j+2],c=Math.cos(sw+cx*.1),s=Math.sin(sw+cx*.1);
+  pos[j]=cx*c-cz*s+(tgt[j]-(cx*c-cz*s))*k;pos[j+1]=cld[j+1]+Math.sin(time+cx)*.05*(1-k)+(tgt[j+1]-cld[j+1])*k;pos[j+2]=cx*s+cz*c+(tgt[j+2]-(cx*s+cz*c))*k}pg.attributes.position.needsUpdate=true}
+ // bonds
+ bonds.visible=nodes.visible=bond>.01;if(bonds.visible){const a=bg.attributes.position.array,na=ng.attributes.position.array;pairs.forEach(([i,j],q)=>{const A=major[i].g.position,B=major[j].g.position;a.set([A.x,A.y,A.z,B.x,B.y,B.z],q*6)});major.forEach((m,i)=>na.set([m.g.position.x,m.g.position.y,m.g.position.z],i*3));bg.attributes.position.needsUpdate=ng.attributes.position.needsUpdate=true;bonds.material.opacity=bond*.9;nodes.material.opacity=bond}
+ // view
+ spin.rotation.set(-.38+smy*.12+.06*e,-.62+P*1.5+smx*.25+(RM?0:Math.sin(time*.3)*.04),0);
+ const t2=2*Math.tan(camera.fov*Math.PI/360),Wd=9.6+6.6*e,Hd=5.6+3.8*e,a=camera.aspect;
+ let d=portrait?Math.max(Wd/(t2*.88),Hd/(t2*a*.92)):Math.max(Wd/(t2*a*.84),Hd/(t2*.8));
+ const copyK=1-sm((P-.05)/.08);d*=1+(portrait?.55:.35)*copyK;
+ camera.position.set(0,0,d);camera.lookAt(0,0,0);
+ if(portrait)camera.setViewOffset(W,H,0,-H*.17*copyK,W,H);else camera.setViewOffset(W,H,-W*.2*copyK,0,W,H);
+ camera.updateProjectionMatrix();root.updateMatrixWorld(true);
+ secLocal.constant=9-8.95*cut;secWorld.copy(secLocal).applyMatrix4(spin.matrixWorld);
+ fr.position.z=secLocal.constant;fr.visible=cut>.01;fr.material.opacity=cut;
+ // DOM: copy & hud
+ const copy=$('copy');copy.style.opacity=copyK;copy.style.transform=portrait?`translateY(${-60*(1-copyK)}px)`:`translateY(calc(-46% - ${60*(1-copyK)}px))`;copy.style.pointerEvents=copyK<.3?'none':'';copy.style.visibility=copyK<.01?'hidden':'';
+ $('hint').style.opacity=copyK;
+ $('hCnt').textContent=vis+(e>.98?' · разнесено':'');$('hEx').textContent=(e*412.6).toFixed(1)+' мм';
+ $('hRot').textContent=String(Math.round(((spin.rotation.y*180/Math.PI)%360+360)%360)).padStart(3,'0')+'°';$('hSec').textContent=cut>.05?'А–А · '+Math.round(cut*100)+'%':'—';
+ // callouts
+ const cv=sm((e-.55)/.35);const cx=W/2,cy=H/2;const maxC=portrait?5:CO.length;
+ callouts.forEach((c,i)=>{const o=i<maxC?cl(cv*1.6-i*.08):0;c.el.style.opacity=o;c.path.style.opacity=c.dot.style.opacity=o;if(o<=0){c.path.setAttribute('d','');c.dot.setAttribute('d','');return}
+  c.p.g.getWorldPosition(tv);const[sx,sy]=proj(tv);const side=portrait?(i%2?1:-1):(sx>=cx?1:-1),up=c.up,len=portrait?34:54+(i%3)*14,ex=sx+side*len*.7,ey=sy+up*len,lx=ex+side*(portrait?16:34);
+  c.path.setAttribute('d',`M${sx} ${sy}L${ex} ${ey}L${lx} ${ey}`);c.dot.setAttribute('d',`M${sx-3} ${sy}a3 3 0 1 0 6 0a3 3 0 1 0 -6 0`);
+  const w=c.el.offsetWidth,h=c.el.offsetHeight;let X=side>0?lx:lx-w;X=cl(X,8,W-w-8);c.el.style.transform=`translate(${X}px,${ey-h/2}px)`});
+ // dimension line: overall length
+ const dv=P>.16?sm((P-.17)/.05):0;if(dv>0){const mo=parts.find(p=>p.name==='motor').g,le=parts.find(p=>p.name==='lens').g;
+  tv.set(-.8,0,0);mo.localToWorld(tv);tv2.set(.12,0,0);le.localToWorld(tv2);const A=proj(tv),B=proj(tv2);let nx=-(B[1]-A[1]),ny=B[0]-A[0];const nl=Math.hypot(nx,ny)||1;nx/=nl;ny/=nl;if((portrait?nx:ny)<0){nx=-nx;ny=-ny}if(portrait&&nx>0){nx=-nx;ny=-ny}
+  const o=portrait?110:150,A2=[A[0]+nx*o,A[1]+ny*o],B2=[B[0]+nx*o,B[1]+ny*o],ux=(B[0]-A[0])/nl,uy=(B[1]-A[1])/nl,ar=8;
+  dimP.setAttribute('d',`M${A[0]+nx*20} ${A[1]+ny*20}L${A2[0]+nx*10} ${A2[1]+ny*10}M${B[0]+nx*20} ${B[1]+ny*20}L${B2[0]+nx*10} ${B2[1]+ny*10}M${A2[0]} ${A2[1]}L${B2[0]} ${B2[1]}`);
+  dimA.setAttribute('d',`M${A2[0]+ux*ar+nx*4} ${A2[1]+uy*ar+ny*4}L${A2[0]} ${A2[1]}L${A2[0]+ux*ar-nx*4} ${A2[1]+uy*ar-ny*4}M${B2[0]-ux*ar+nx*4} ${B2[1]-uy*ar+ny*4}L${B2[0]} ${B2[1]}L${B2[0]-ux*ar-nx*4} ${B2[1]-uy*ar-ny*4}`);
+  const L=(tv.distanceTo(tv2)*28.6).toFixed(1);const mxp=(A2[0]+B2[0])/2,myp=(A2[1]+B2[1])/2;let ang=Math.atan2(uy,ux)*180/Math.PI;if(ang>90)ang-=180;if(ang<-90)ang+=180;
+  dimT.textContent='L = '+L+' мм';dimT.setAttribute('transform',`translate(${mxp+nx*14},${myp+ny*14}) rotate(${ang})`);dimT.setAttribute('text-anchor','middle')}
+ [dimP,dimA,dimT].forEach(x=>x.style.opacity=dv*.9);
+ renderer.render(scene,camera)}
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>
