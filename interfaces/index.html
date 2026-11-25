@@ -53,6 +53,20 @@ dd { margin: 0; min-width: 0; }
 .copy { font: inherit; font-weight: 700; font-size: 14px; border: 0; border-radius: 999px; padding: 10px 18px; background: var(--accent); color: var(--on-accent); cursor: pointer; white-space: nowrap; }
 .copy:disabled { background: var(--line); color: var(--muted); cursor: default; }
 .foot { margin-top: 40px; color: var(--muted); font-size: 14px; max-width: 72ch; }
+.gpt { margin-top: 72px; display: grid; gap: 16px; }
+.sec { font-size: clamp(24px, 3.2vw, 34px); margin: 0; font-weight: 800; letter-spacing: -.01em; text-wrap: balance; }
+.ggrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr)); gap: 20px; margin-top: 8px; }
+.gcard { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; min-width: 0; }
+.gcard a { display: block; }
+.gcard img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; display: block; }
+.gcard .body { padding: 16px 18px 18px; gap: 10px; }
+.gcard h3 { margin: 0; font-size: 18px; }
+.gcard p { margin: 0; color: var(--muted); font-size: 14px; }
+.ideas { margin: 8px 0 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 12px; counter-reset: idea; }
+.ideas li { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; display: grid; gap: 6px; counter-increment: idea; }
+.ideas li::before { content: "Идея " counter(idea); font-family: var(--mono); font-size: 12px; color: var(--accent); text-transform: uppercase; letter-spacing: .06em; }
+.ideas b { font-size: 17px; }
+.ideas span { color: var(--muted); font-size: 14px; }
 @media (max-width: 560px) {
   .shots { grid-template-columns: 1fr; grid-template-rows: auto; }
   .shots img:first-child { grid-row: auto; aspect-ratio: 16 / 10; }
@@ -66,12 +80,22 @@ dd { margin: 0; min-width: 0; }
 <div class="wrap">
   <header>
     <div class="eyebrow">Катализ · студия Центра Бизнес Технологий · интерфейсы v1</div>
-    <h1>Шесть интерфейсов для одного лендинга</h1>
+    <h1>Шесть интерфейсов для одного лендинга — и как их видит GPT</h1>
     <p class="intro">Во всех вариантах одинаковый текст и одна идея: тёмная материя при скролле становится молекулой, сердцем, механизмом и продуктом. Различаются механика первого экрана, типографика, кнопки, карточки и переходы. Каждый вариант — рабочая страница: откройте её и прокрутите.</p>
     <div class="howto"><span><b>1.</b> Откройте вариант и прокрутите первый экран</span><span><b>2.</b> Отметьте, что берём из него</span><span><b>3.</b> Скопируйте выбор внизу и пришлите в чат</span></div>
   </header>
 
   <main class="grid" id="grid"></main>
+
+  <section class="gpt">
+    <div class="eyebrow">Для сравнения · GPT</div>
+    <h2 class="sec">Как те же шесть направлений видит GPT</h2>
+    <p class="intro">Картинки от gpt-image-1.5 через CometAPI по тому же брифу. Это статичные макеты, а не страницы, зато по ним хорошо видно настроение, типографику и детали. Нажмите на картинку, чтобы открыть её в полном размере.</p>
+    <div class="ggrid" id="ggrid"></div>
+
+    <h2 class="sec" style="margin-top:56px">Ещё восемь идей первого экрана от GPT</h2>
+    <ol class="ideas" id="ideas"></ol>
+  </section>
 
   <p class="foot">Прототипы собраны в коде, а не нарисованы: 3D на three.js и шейдерах, всё генерируется на лету. На слабом телефоне сцены могут подтормаживать — для сравнения лучше открывать на компьютере. Цифры на страницах — ориентиры, кейсы — примеры.</p>
 </div>
@@ -142,8 +166,43 @@ grid.innerHTML = VARIANTS.map(v => `
     </div>
   </article>`).join('');
 
+const GPT = [
+  { n: 'G1', f: 'g01-dark-matter', name: 'Тёмная материя', note: 'Сердце из частиц, очень сдержанный интерфейс по центру.' },
+  { n: 'G2', f: 'g02-exploded', name: 'Точность в мелочах', note: 'Фотореальный механизм в разборе с выносками размеров.' },
+  { n: 'G3', f: 'g03-liquid-metal', name: 'Жидкий металл', note: 'Хромовая молекула и хромовая кнопка-капля.' },
+  { n: 'G4', f: 'g04-laboratory', name: 'Лаборатория', note: 'Сердце из чёрных шаров, вертикальный список этапов слева.' },
+  { n: 'G5', f: 'g05-conveyor', name: 'Конвейер', note: 'Все пять форм сразу на одной ленте, таймер и «3 недели → 5 дней».' },
+  { n: 'G6', f: 'g06-hologram', name: 'Голограмма', note: 'Пиксельное сердце, сканирующая линия, проценты анализа.' },
+  { n: 'G7', f: 'g07-free-1', name: 'Свободное направление GPT', note: 'Светлая «витрина»: облако, молекула, сердце, механизм, продукт в одном ряду.' },
+  { n: 'G8', f: 'g08-ui-kit', name: 'Лист компонентов', note: 'Кнопки, карточки, навигация, форма в тёмном стиле.' }
+];
+const GPARTS = ['Настроение', 'Шрифты', 'Цвета', 'Компоновка', 'Детали'];
+document.getElementById('ggrid').innerHTML = GPT.map(g => `
+  <article class="gcard">
+    <a href="gpt/web/${g.f}.jpg"><img src="gpt/web/${g.f}.jpg" alt="Макет GPT: ${g.name}" loading="lazy"></a>
+    <div class="body">
+      <h3>${g.name}</h3>
+      <p>${g.note}</p>
+      <div class="chips">${GPARTS.map((p, i) => `<button type="button" class="chip" id="chip-${g.n}-${i}" data-v="${g.n}" data-p="${p}" aria-pressed="${(picks[g.n] || []).includes(p)}">${p}</button>`).join('')}</div>
+    </div>
+  </article>`).join('');
+document.getElementById('ggrid').addEventListener('click', e => grid.dispatchEvent(new CustomEvent('pick', { detail: e.target })));
+
+const IDEAS = [
+  ['Чёрный катализатор', 'Одна непрерывная трансформация: облако → молекула → сердце → механизм → продукт. Шейдеры и морфинг.'],
+  ['Лаборатория форм', 'Светлая виртуальная лаборатория: лучи собирают облако, секущие плоскости разбирают сердце на механизм.'],
+  ['Графический катализ', 'Заранее отрендеренное видео киношного качества, управляемое скроллом. Красиво, но меньше интерактива.'],
+  ['Живая материя', 'Жидкий металл, собранный в Spline: быстрее в разработке, меньше контроля.'],
+  ['Секция точности', 'Камера спускается по слоям разреза: облако, молекулы, анатомия, инженерия, продукт.'],
+  ['Оркестр деталей', 'Детали входят по очереди, как инструменты в оркестре; можно со звуком.'],
+  ['Переход фаз', 'Газ замерзает в кристалл, плавится в сердце, куётся в механизм, шлифуется в продукт.'],
+  ['Нить процесса', 'Светящаяся нить ведёт материю через все формы — путь клиента от идеи до результата.']
+];
+document.getElementById('ideas').innerHTML = IDEAS.map(([t, d]) => `<li><b>${t}</b><span>${d}</span></li>`).join('');
+
 function summaryText() {
-  return VARIANTS.filter(v => (picks[v.n] || []).length)
+  return [...VARIANTS.map(v => ({ n: v.n, name: v.name })), ...GPT.map(g => ({ n: g.n, name: 'GPT ' + g.name }))]
+    .filter(v => (picks[v.n] || []).length)
     .map(v => `${v.n} ${v.name}: ${picks[v.n].join(', ').toLowerCase()}`);
 }
 function render() {
@@ -152,15 +211,17 @@ function render() {
   s.innerHTML = lines.length ? '<b>Берём:</b> ' + lines.join(' · ') : 'Пока ничего не отмечено';
   document.getElementById('copy').disabled = !lines.length;
 }
-grid.addEventListener('click', e => {
-  const c = e.target.closest('.chip'); if (!c) return;
+function toggle(target) {
+  const c = target.closest && target.closest('.chip'); if (!c) return;
   const list = picks[c.dataset.v] || (picks[c.dataset.v] = []);
   const i = list.indexOf(c.dataset.p);
   if (i < 0) list.push(c.dataset.p); else list.splice(i, 1);
   c.setAttribute('aria-pressed', i < 0);
   try { localStorage.setItem('katalys-picks', JSON.stringify(picks)); } catch (err) {}
   render();
-});
+}
+grid.addEventListener('click', e => toggle(e.target));
+grid.addEventListener('pick', e => toggle(e.detail));
 document.getElementById('copy').addEventListener('click', async e => {
   const text = 'Что берём из интерфейсов:\n' + summaryText().join('\n');
   try { await navigator.clipboard.writeText(text); e.target.textContent = 'Скопировано'; }
