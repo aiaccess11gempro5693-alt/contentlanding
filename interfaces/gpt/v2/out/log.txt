@@ -1,0 +1,19 @@
+
+== 2026-11-25 11:46:03 UTC ==
+план: gpt-5.6, 8 направлений, 77 с
+d1-page: gpt-image-2, 65 с
+d1-hero: gpt-image-2, 67 с
+d2-page: gpt-image-2, 97 с
+d2-hero: gpt-image-2, 125 с
+d3-page: gpt-image-2, 69 с
+d3-hero: gpt-image-2, 86 с
+d4-page: gpt-image-2, 141 с
+d4-hero: gpt-image-2, 128 с
+d5-page: gpt-image-2, 152 с
+d5-hero: gpt-image-2, 95 с
+d6-page: gpt-image-2, 113 с
+d6-hero: gpt-image-2, 86 с
+d7-page: gpt-image-2, 162 с
+d7-hero: gpt-image-2, 132 с
+d8-page: gpt-image-2, 107 с
+d8-hero: gpt-image-2, 39 с

@@ -1,0 +1,142 @@
+{
+  "strategy": "Сайт должен производить впечатление не просто production-студии, а точной визуальной лаборатории, способной превращать сложные идеи в кинематографичные образы. Вместо типичного портфолио с сеткой карточек первый экран сразу демонстрирует главный навык команды: управляемую трансформацию материи, света и смысла. 3D-видео становится не отдельной услугой, а визуальным доказательством качества всей студии и связующим мотивом страницы. Контраст между эмоциональной кинематографией и строгой информационной системой подчёркивает сочетание творчества, скорости и контроля. ИИ-конвейер показывается не как автоматизация ради экономии, а как способ исследовать больше концепций и доводить детали до высокого уровня. Медицинские кейсы присутствуют в витрине как примеры сложной научной визуализации, но общая айдентика остаётся универсальной и отраслево нейтральной. Финальное впечатление: премиальная, технологичная и взрослая студия, которой можно доверить задачу любой сложности.",
+  "directions": [
+    {
+      "id": "d1",
+      "name": "Ультрамариновая материя",
+      "idea": "Тёмный кинематографичный сайт, построенный вокруг единого бесконечно трансформирующегося объекта. Глубокий ультрамарин, фиолетовое свечение и точная холодная типографика напрямую передают качество научного 3D, не превращая сайт в медицинский.",
+      "palette": [
+        "#050711",
+        "#0B1E6D",
+        "#315CFF",
+        "#7B4DFF",
+        "#FF4E61",
+        "#EAF0FF"
+      ],
+      "fonts": "Golos Display для заголовков, Manrope для интерфейса и текста",
+      "hero_mechanic": "При начале скролла бесформенное облако тёмной материи уплотняется в глянцевую ленту; затем лента распадается на микрочастицы и нити; частицы формируют молекулярную решётку; решётка превращается в каскад карточек и в конце собирается в точный светящийся знак-точку.",
+      "page_prompt": "Create a premium full-page Russian creative studio website mockup, vertical 2:3 composition, showing the entire landing page from navigation to contact. Use a near-black cinematic canvas #050711 with ultramarine #315CFF, violet #7B4DFF, restrained red #FF4E61 and icy white typography. At the top place minimal navigation, «Катализ», the descriptor «студия Центра Бизнес Технологий», and a compact «Обсудить проект» button. The hero contains enormous Golos Display typography «Точность в каждой детали» beside a glossy dark-matter ribbon dissolving into luminous particles. Continue with a one-line manifesto, oversized metrics «2–4×», «100+», «9 лет», «800+», then four asymmetrical direction panels titled «Визуал», «Движение и 3D», «Интерактив», «Цифровые люди». Show the process «Бриф», «Концепция», «Продакшн», «Контроль», «Выдача» as a precise luminous timeline. Case frames must include an unbranded product pack in blue light, red blood cells with fibrin strands, a glossy violet protein surface receiving a small molecule, and a clean three-card reaction cascade. Add textual clients «ЦентрФарма», «Омнифарма», a dense formats wall, and a glowing contact footer. No real logos, browser frame, device, heart, anatomical organs, pills, doctors, syringes or medical crosses.",
+      "hero_prompt": "Design a close-up desktop hero for «Катализ», horizontal 3:2, captured halfway through a scroll-driven transformation. The background is deep cinematic black #050711 fading into ultramarine #0B1E6D. A large central mass begins as glossy liquid obsidian on the left, stretches into a translucent violet ribbon, then disintegrates on the right into thousands of blue particles, fine fibrin-like threads and a few abstract molecular nodes. The object must feel physically plausible, rendered with ray-traced reflections, soft subsurface scattering, volumetric haze and very shallow depth of field. Avoid biological anatomy; the image should suggest precision, microstructure and cinematic science without appearing pharmaceutical. Use an editorial twelve-column grid. Place «Катализ» and «студия Центра Бизнес Технологий» in the upper-left navigation, with «Работы», «Направления», «Контакты» and a thin outlined «Обсудить проект» control. Set the headline «Точность в каждой детали» in large white Golos Display, aligned left and partially overlapped by the matter. Add a small metric «2–4× быстрее» and a subtle vertical scroll indicator. Use restrained red #FF4E61 only as one tiny spark. No real logos, browser chrome, devices, heart, organs, pills, doctors, syringes or medical crosses."
+    },
+    {
+      "id": "d2",
+      "name": "Белый атлас точности",
+      "idea": "Светлое редакционное направление соединяет швейцарскую сетку, эстетику научного атласа и дорогую журнальную вёрстку. Кинематографичные кадры работают как насыщенные цветовые окна внутри почти бумажного интерфейса.",
+      "palette": [
+        "#F4F2EC",
+        "#FFFFFF",
+        "#17191C",
+        "#2447E8",
+        "#FF5B45",
+        "#B9C0CC"
+      ],
+      "fonts": "PT Root UI для заголовков и интерфейса, Literata для акцентных фраз",
+      "hero_mechanic": "Чёрная графитовая капля растягивается в каллиграфический штрих; штрих становится системой координат; сетка раскрывается в микроскопический ландшафт; ландшафт складывается в аккуратный цветной кадр кейса.",
+      "page_prompt": "Create a complete premium website layout in a tall vertical 2:3 format for a Russian content studio, using a warm paper background #F4F2EC, crisp white #FFFFFF, graphite #17191C, cobalt #2447E8 and coral #FF5B45. The visual language combines Swiss editorial design, a scientific atlas and contemporary 2026 web art direction. Show every section in one continuous page. Begin with a strict modular navigation containing «Катализ», «Работы», «Услуги», «Контакты» and «Обсудить проект». The hero uses huge black PT Root UI text «Точность в каждой детали», a delicate Literata annotation, and a graphite liquid stroke transforming into a coordinate grid and a colorful microscopic landscape. Follow with a spacious manifesto, then metrics «2–4×», «100+», «9 лет», «800+» separated by hairlines. Arrange «Визуал», «Движение и 3D», «Интерактив», «Цифровые люди» as an editorial index. Present the five production stages as numbered marginal notes. Build a case gallery from cinematic stills: blue-lit unbranded packaging, floating red blood cells and fibrin, a violet bubble-like protein surface, and a minimal three-card cascade diagram. Add textual clients «ЦентрФарма», «Омнифарма», a typographic formats wall and a cobalt contact block. No real logos, browser frame, devices, heart, organs, pills, doctors, syringes or medical symbols.",
+      "hero_prompt": "Create a light editorial website hero in horizontal 3:2 for «Катализ». Use warm off-white paper #F4F2EC with subtle fibers, a precise twelve-column grid, thin graphite rules and generous negative space. Across the center, render a dark graphite droplet caught during transformation: its left side is dense matte liquid, the middle stretches into an elegant ink-like ribbon, and the right side resolves into blue coordinate lines, tiny particles and a cropped cinematic micro-world window. Inside that window show abstract translucent cells, red discs and fine fibrin threads in soft cobalt light, with no anatomy. Set «Точность в каждой детали» as oversized black PT Root UI typography over three lines; use a small Literata italic note for human warmth. The upper navigation includes «Катализ», «студия Центра Бизнес Технологий», «Работы», «Направления», «Контакты» and a cobalt «Обсудить проект» button. Add a small vertical label «2–4× быстрее» and one coral #FF5B45 registration mark. The composition should resemble an expensive cultural magazine rather than a medical site. Use realistic shadows and print-like microtexture. No real logos, browser chrome, device mockups, heart, organs, pills, doctors, syringes or crosses."
+    },
+    {
+      "id": "d3",
+      "name": "Сигнальная кинетика",
+      "idea": "Энергичное направление с крупной типографикой, резкими цветовыми полями и управляемой нео-бруталистской композицией. Оно показывает скорость ИИ-конвейера, но сохраняет премиальность через строгую сетку, качественный моушн и безупречные 3D-кадры.",
+      "palette": [
+        "#0D0D0D",
+        "#F2FF3D",
+        "#FF3D8D",
+        "#5B4BFF",
+        "#F5F5F0",
+        "#8DFFEA"
+      ],
+      "fonts": "Unbounded для крупных заголовков, IBM Plex Sans для текста и данных",
+      "hero_mechanic": "Матовая чёрная масса врезается в кислотное цветовое поле; от удара она дробится на типографические блоки; блоки ускоряются по сетке, превращаются в кадры роликов и фиксируются в аккуратной системе карточек.",
+      "page_prompt": "Design an entire 2026 neo-brutalist yet premium studio landing page, vertical 2:3, with all sections visible. Use black #0D0D0D, acid yellow #F2FF3D, hot pink #FF3D8D, electric violet #5B4BFF, mint #8DFFEA and warm white #F5F5F0. Keep the construction rigorous: thick rules, oversized Unbounded headlines, compact IBM Plex Sans data, offset modules and controlled overlaps. The top navigation shows «Катализ», «Работы», «Процесс», «Контакты» and a solid «Старт проекта» button. In the hero, place «Точность в каждой детали» beside a matte black mass crashing through an acid panel and breaking into typographic tiles, particles and glossy 3D fragments. Continue with a one-line manifesto and huge metric bands «2–4× быстрее», «100+ концепций», «9 лет», «800+ проектов». Give each direction—«Визуал», «Движение и 3D», «Интерактив», «Цифровые люди»—its own bold color field. Show «Бриф», «Концепция», «Продакшн», «Контроль», «Выдача» as a kinetic conveyor. Include case stills of blue product packaging, a red-cell and fibrin micro-world, violet molecular docking, and a clean three-card cascade. Finish with «ЦентрФарма», «Омнифарма», a dense format wall and a high-contrast contact CTA. No real logos, browser frame, devices, heart, organs, pills, doctors, syringes or medical crosses.",
+      "hero_prompt": "Create a bold horizontal 3:2 hero for «Катализ» in a refined neo-brutalist style. A matte black three-dimensional mass is frozen at the exact moment it punches through a flat acid-yellow #F2FF3D plane. The impact transforms the mass into glossy violet shards, hot-pink particles, mint wireframe fragments and rectangular UI tiles, all following a disciplined diagonal motion path. Use hard studio lighting, razor-sharp contact shadows and selective motion blur; materials should feel expensive and physically rendered, not illustrative. Set the massive headline «Точность в каждой детали» in black and warm-white Unbounded, occupying half the frame and interacting with the flying fragments. Use IBM Plex Sans for compact navigation: «Катализ», «Работы», «Направления», «Контакты», plus a pink «Обсудить проект» button. Include a small data badge «2–4× быстрее» and a segmented scroll-progress bar. The grid may feel disruptive but must remain highly legible, with generous blank zones balancing the collision. Avoid generic startup graphics and medical styling. No real company logos, browser frame, devices, heart, anatomical organs, pills, capsules, doctors, syringes or crosses."
+    },
+    {
+      "id": "d4",
+      "name": "Тактильный катализ",
+      "idea": "Тёплое премиальное направление заменяет привычный технологический холод на камень, дымчатое стекло, металл и мягкий янтарный свет. Оно позиционирует студию как ремесленную мастерскую цифрового производства, где ИИ ускоряет процесс, но результат доводится руками.",
+      "palette": [
+        "#171512",
+        "#D8C8AE",
+        "#F1E8DA",
+        "#A75B3B",
+        "#6D7891",
+        "#2C2925"
+      ],
+      "fonts": "Prata для крупных акцентов, Onest для интерфейса и основного текста",
+      "hero_mechanic": "Комок дымчатого стекла нагревается и становится текучим; жидкость обволакивает металлическую сетку; сетка раскрывается в микрорельеф; микрорельеф полируется до идеальной линзы с кадром будущего ролика.",
+      "page_prompt": "Create a full premium landing page mockup in vertical 2:3 for «Катализ», combining digital craft with tactile luxury. Use charcoal #171512, parchment #F1E8DA, sand #D8C8AE, oxidized copper #A75B3B and muted steel blue #6D7891. Materials include smoked glass, honed stone, brushed metal, translucent resin and subtle paper grain. Show the complete page: restrained navigation, a cinematic hero with «Точность в каждой детали», a concise manifesto, metrics «2–4×», «100+», «9 лет», «800+», four service directions, process, work, clients, formats and contact. Typeset expressive headings in Prata and functional UI in Onest. The hero object is a warm smoked-glass mass melting around a fine metallic lattice. Build «Визуал», «Движение и 3D», «Интерактив», «Цифровые люди» as material sample slabs. Present «Бриф», «Концепция», «Продакшн», «Контроль», «Выдача» like engraved workshop stages. Case imagery should include a blue-lit unbranded package, soft-focus red blood cells with fibrin threads, a glossy violet protein landscape with molecular interaction, and a precise three-card infographic. Add textual clients «ЦентрФарма», «Омнифарма», an embossed format wall, and «Обсудить проект» in the footer. No real logos, browser frame, devices, heart, organs, pills, doctors, syringes or crosses.",
+      "hero_prompt": "Design a tactile luxury website hero for «Катализ», horizontal 3:2, with the atmosphere of an advanced digital atelier. Against a charcoal #171512 background, show a large smoked-glass object during transformation: a rough obsidian-like core on the left warms into translucent amber resin, wraps around a fine brushed-steel lattice in the center, and becomes a perfectly polished lens on the right. Through the lens, reveal a tiny cobalt and violet micro-world of suspended particles and fine threads, abstract and non-anatomical. Illuminate the scene with a warm side light, cool blue rim light, gentle volumetric dust and realistic caustics. Place «Точность в каждой детали» in elegant ivory Prata, balanced by minimal Onest navigation containing «Катализ», «Работы», «Процесс», «Контакты» and an outlined copper «Обсудить проект» button. Include the descriptor «студия Центра Бизнес Технологий» and a discreet «2–4× быстрее» marker engraved into a metal strip. Use calm asymmetry, luxurious negative space and editorial cropping. No real logos, browser interface, devices, heart, organs, pills, capsules, doctors, syringes or medical crosses."
+    },
+    {
+      "id": "d5",
+      "name": "Гравитационное поле",
+      "idea": "Монументальный тёмный концепт воспринимает студию как силу, собирающую хаос в ясную форму. Космический масштаб сочетается с микромиром, а навигация и данные выглядят как точные координаты внутри кинематографичного пространства.",
+      "palette": [
+        "#020307",
+        "#111A33",
+        "#4169FF",
+        "#9D76FF",
+        "#F4F7FF",
+        "#FF684F"
+      ],
+      "fonts": "Golos Display для заголовков, IBM Plex Mono для метаданных, Manrope для текста",
+      "hero_mechanic": "Облако чёрных частиц вращается вокруг невидимого центра; орбиты уплотняются в светящееся кольцо; кольцо выворачивается в клеточную мембрану абстрактного микромира; затем становится объективом, внутри которого запускается кейс.",
+      "page_prompt": "Create a complete dark cinematic website in vertical 2:3, presenting every landing-page section as one continuous gravitational journey. Use cosmic black #020307, midnight blue #111A33, electric blue #4169FF, ultraviolet #9D76FF, white #F4F7FF and a tiny coral accent #FF684F. The navigation is sparse and coordinate-like, showing «Катализ», «Работы», «Направления», «Контакты» and «Обсудить проект». The hero headline «Точность в каждой детали» floats beside a vast black particle cloud collapsing into a luminous gravitational ring. Continue into a manifesto framed as a single transmission, then orbital metric modules «2–4×», «100+», «9 лет», «800+». Arrange «Визуал», «Движение и 3D», «Интерактив», «Цифровые люди» on different orbital paths. Draw the workflow «Бриф», «Концепция», «Продакшн», «Контроль», «Выдача» as five aligned coordinates. Create a wide cinematic case reel with an unbranded blue package, red blood cells moving through fibrin threads, a violet molecular interaction on a glossy protein surface, and a minimal reaction cascade. Add textual clients «ЦентрФарма», «Омнифарма», a constellation-like formats wall, and a bright contact horizon. Use Golos Display, Manrope and IBM Plex Mono. No real logos, browser frame, devices, heart, organs, pills, doctors, syringes or crosses.",
+      "hero_prompt": "Create a monumental horizontal 3:2 website hero for «Катализ», combining deep space scale with microscopic precision. The background is nearly black #020307 with faint midnight-blue atmospheric gradients. At center-right, billions of black and cobalt particles rotate around an invisible force, forming an incomplete luminous ring. The left edge of the cloud remains chaotic and smoky; the center becomes a precise ultraviolet membrane-like surface; the right edge resolves into a glass optical aperture revealing a tiny cinematic world of floating red discs, fine fibrin strands and blue haze. Keep all forms abstract and avoid anatomy. Use realistic volumetric lighting, deep focus transitions, subtle gravitational lensing and one coral #FF684F spark. Place «Точность в каждой детали» in huge white Golos Display on the left. Above it, use minimal coordinate navigation with «Катализ», «Работы», «Направления», «Контакты» and a thin «Обсудить проект» control. Add «2–4× быстрее» in IBM Plex Mono and a circular scroll-progress indicator. The result must feel like a premium title sequence, not a science-fiction game or medical brand. No real logos, browser chrome, devices, heart, organs, pills, doctors, syringes or medical crosses."
+    },
+    {
+      "id": "d6",
+      "name": "Прозрачная система",
+      "idea": "Светлый технологичный сайт строится из прозрачных слоёв, цветных линз и идеально организованных данных. Визуально он напоминает интерфейс будущего без клише дашбордов и показывает, как множество вариантов превращается в контролируемый результат.",
+      "palette": [
+        "#EEF3F7",
+        "#FFFFFF",
+        "#18202A",
+        "#246BFD",
+        "#8D5CFF",
+        "#20C7B7"
+      ],
+      "fonts": "Onest для заголовков и текста, IBM Plex Mono для чисел и технических подписей",
+      "hero_mechanic": "Полупрозрачное облако конденсируется в стеклянные пластины; пластины выстраиваются слоями интерфейса; внутри слоёв возникают частицы и сетки; в финале линзы совмещаются и дают один идеально резкий кадр.",
+      "page_prompt": "Design a full light 2026 landing page in vertical 2:3 for «Катализ», with all sections clearly visible. Use mist white #EEF3F7, pure white #FFFFFF, dark ink #18202A, blue #246BFD, violet #8D5CFF and teal #20C7B7. Build the interface from translucent glass sheets, soft refractions, subtle grain and crisp data lines, avoiding generic dashboard aesthetics. The navigation contains «Катализ», «Работы», «Услуги», «Процесс», «Контакты» and a blue «Обсудить проект» button. In the hero, set «Точность в каждой детали» beside a cloud condensing into stacked optical plates, with particles becoming sharply focused through aligned lenses. Follow with a short manifesto and clean metric modules «2–4× быстрее», «100+ вариантов», «9 лет», «800+ проектов». Present «Визуал», «Движение и 3D», «Интерактив», «Цифровые люди» as overlapping transparent layers. Render «Бриф», «Концепция», «Продакшн», «Контроль», «Выдача» as a calibrated pipeline. The case gallery includes blue-lit packaging, a soft red-cell and fibrin micro-world, violet molecular docking on a glossy protein surface, and a three-card cascade infographic. Add «ЦентрФарма», «Омнифарма», a modular formats wall and a clear contact section. No real logos, browser frame, devices, heart, organs, pills, doctors, syringes or crosses.",
+      "hero_prompt": "Create a luminous light-theme hero for «Катализ» in horizontal 3:2. The background is cool mist #EEF3F7 with a subtle paper-grain texture and a disciplined twelve-column grid. A translucent vapor mass enters from the right and is captured midway through transformation into several floating optical-glass plates. The first plates contain blurred blue and violet particles; successive layers organize them into a fine grid; the final lens produces one perfectly sharp cinematic detail with teal light and tiny red discs suspended among delicate threads. Use physically accurate refraction, soft caustics, frosted edges and restrained shadows. Place the large dark-ink headline «Точность в каждой детали» on the left in Onest, with generous line spacing. The top navigation includes «Катализ», «студия Центра Бизнес Технологий», «Работы», «Направления», «Контакты» and a compact blue «Обсудить проект» button. Add «2–4× быстрее» in IBM Plex Mono and a tiny calibrated scroll scale. The composition must look premium, calm and highly engineered without resembling medical software. No real logos, browser chrome, device mockups, heart, anatomical organs, pills, capsules, doctors, syringes or medical crosses."
+    },
+    {
+      "id": "d7",
+      "name": "Режиссёрский монтаж",
+      "idea": "Почти монохромный сайт говорит языком кино: монтажные склейки, таймкоды, крупные титры и контактные листы. Красный используется как режиссёрская отметка, а 3D-кейсы становятся главным драматургическим материалом страницы.",
+      "palette": [
+        "#080808",
+        "#F0EEE8",
+        "#B8B8B3",
+        "#E4382C",
+        "#343434",
+        "#6F75FF"
+      ],
+      "fonts": "Golos Display для титров, PT Root UI для текста, IBM Plex Mono для таймкодов",
+      "hero_mechanic": "Чёрная материя выглядит как плёнка, смятая в объём; при скролле она расправляется в киноленту; кадры на ленте оживают и переходят в полноэкранные сцены; затем лента превращается в точную монтажную шкалу.",
+      "page_prompt": "Create an entire monochrome cinematic studio website in a tall vertical 2:3 layout, showing every section from header to contact. Use black #080808, film white #F0EEE8, grey #B8B8B3, director red #E4382C and rare periwinkle #6F75FF. The design language combines film titles, editorial contact sheets, timecodes and premium contemporary web typography. Start with navigation showing «Катализ», «Работы», «Услуги», «Контакты» and «Обсудить проект». The hero features «Точность в каждой детали» in huge Golos Display type beside a black volumetric mass unfolding into a strip of film. Place the manifesto as a single dramatic title card. Show «2–4×», «100+», «9 лет», «800+» as oversized chapter markers. Introduce «Визуал», «Движение и 3D», «Интерактив», «Цифровые люди» through four differently cropped frames. The production stages «Бриф», «Концепция», «Продакшн», «Контроль», «Выдача» form an editing timeline. Case contact sheets include a blue-light product pack, red blood cells and fibrin, violet molecular docking on a bubble-like protein surface, and a clean three-card cascade. Finish with textual clients «ЦентрФарма», «Омнифарма», a rolling formats credit list and a red contact title. No real logos, browser frame, devices, heart, organs, pills, doctors, syringes or crosses.",
+      "hero_prompt": "Design a cinematic black-and-white website hero for «Катализ», horizontal 3:2, resembling an award-winning title sequence rather than a portfolio template. A glossy black mass at center-right looks like physical film crushed into a dense sculpture. Mid-transformation, it unfurls into a wide translucent film strip crossing the composition diagonally. Several frames glow with controlled color: an unbranded product pack under blue light, suspended red discs and fibrin threads, a violet glossy molecular landscape, and a minimal three-card diagram. Keep the imagery abstract, refined and free of anatomy. Use hard white projector light, subtle halation, film grain, deep shadows and a single red #E4382C editing mark. Set «Точность в каждой детали» as enormous film-white Golos Display typography on the left. Navigation at the top contains «Катализ», «Работы», «Направления», «Контакты» and «Обсудить проект». Add an IBM Plex Mono timecode, «2–4× быстрее», frame numbers and a fine scroll timeline. Preserve generous negative space despite the dramatic diagonal. No real logos, browser chrome, devices, heart, organs, pills, doctors, syringes or medical crosses."
+    },
+    {
+      "id": "d8",
+      "name": "Спектральная линза",
+      "idea": "Яркое футуристичное направление строится на переливающихся мембранах, спектральных градиентах и глубоком чёрном фоне. Оно говорит о множестве потенциальных концепций и моменте, когда студия фокусирует их в одно точное решение.",
+      "palette": [
+        "#07070A",
+        "#35E0FF",
+        "#865DFF",
+        "#FF5CB8",
+        "#F7FAFF",
+        "#B8FF6A"
+      ],
+      "fonts": "Unbounded для акцентных заголовков, Manrope для интерфейса, IBM Plex Mono для чисел",
+      "hero_mechanic": "Чёрная жидкая сфера покрывается радужной мембраной; мембрана делится на десятки полупрозрачных вариантов; варианты вращаются как спектральные лепестки; при совмещении они формируют одну кристально резкую линзу и финальный кадр.",
+      "page_prompt": "Create a complete premium iridescent website for «Катализ» in vertical 2:3, displaying the full landing page. Use deep black #07070A, cyan #35E0FF, violet #865DFF, pink #FF5CB8, icy white #F7FAFF and rare lime #B8FF6A. The aesthetic is futuristic 2026 digital craft: spectral membranes, diffraction, liquid lenses and precise dark UI, never playful or gaming-like. Place minimal navigation with «Катализ», «Работы», «Направления», «Процесс», «Контакты» and «Обсудить проект». The hero combines the headline «Точность в каждой детали» with a black liquid sphere splitting into dozens of iridescent translucent variants and recombining into one perfect lens. Continue with a concise manifesto, then luminous metrics «2–4×», «100+», «9 лет», «800+». Build «Визуал», «Движение и 3D», «Интерактив», «Цифровые люди» as four spectral chambers. Present «Бриф», «Концепция», «Продакшн», «Контроль», «Выдача» along a focused light path. Case windows show blue-lit unbranded packaging, red blood cells among fibrin strands, a violet molecule interacting with a glossy protein surface, and a pristine three-card reaction cascade. Include «ЦентрФарма», «Омнифарма», a holographic formats wall and a high-impact contact section. No real logos, browser frame, devices, heart, organs, pills, doctors, syringes or medical crosses.",
+      "hero_prompt": "Create a spectacular but controlled horizontal 3:2 hero for the Russian studio «Катализ». On a deep-black #07070A background, render a large liquid-black sphere during a multi-stage optical transformation. Its left side remains smooth obsidian; the center blooms into dozens of wafer-thin iridescent membranes in cyan #35E0FF, violet #865DFF and pink #FF5CB8; the right side recombines into one crystal-clear lens. Inside the lens, reveal a sharply focused microscopic cinematic scene with soft blue haze, tiny particles, red disc-like cells and delicate fibrin threads, without anatomy. Use realistic thin-film interference, ray-traced reflections, chromatic diffraction, volumetric rim lighting and shallow depth of field. Set «Точность в каждой детали» in large icy-white Unbounded typography, arranged in a compact architectural block. Use Manrope navigation with «Катализ», «Работы», «Направления», «Контакты» and a spectral outlined «Обсудить проект» button. Add «100+ вариантов» and «2–4× быстрее» as small IBM Plex Mono labels around the membranes. Include a minimal scroll marker aligned to the lens axis. No real logos, browser chrome, devices, heart, organs, pills, capsules, doctors, syringes or medical crosses."
+    }
+  ],
+  "planner": "gpt-5.6"
+}
