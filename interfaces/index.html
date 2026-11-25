@@ -62,6 +62,8 @@ dd { margin: 0; min-width: 0; }
 .gcard .body { padding: 16px 18px 18px; gap: 10px; }
 .gcard h3 { margin: 0; font-size: 18px; }
 .gcard p { margin: 0; color: var(--muted); font-size: 14px; }
+.ggrid.tall { grid-template-columns: repeat(auto-fill, minmax(min(100%, 290px), 1fr)); }
+.ggrid.tall img { aspect-ratio: 2 / 3; object-position: top; }
 .ideas { margin: 8px 0 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 12px; counter-reset: idea; }
 .ideas li { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; display: grid; gap: 6px; counter-increment: idea; }
 .ideas li::before { content: "Идея " counter(idea); font-family: var(--mono); font-size: 12px; color: var(--accent); text-transform: uppercase; letter-spacing: .06em; }
@@ -92,6 +94,10 @@ dd { margin: 0; min-width: 0; }
     <h2 class="sec">Как те же шесть направлений видит GPT</h2>
     <p class="intro">Картинки от gpt-image-1.5 через CometAPI по тому же брифу. Это статичные макеты, а не страницы, зато по ним хорошо видно настроение, типографику и детали. Нажмите на картинку, чтобы открыть её в полном размере.</p>
     <div class="ggrid" id="ggrid"></div>
+
+    <h2 class="sec" style="margin-top:56px">Восемь дизайнов всей страницы на выбор</h2>
+    <p class="intro">Каждый макет — лендинг целиком, сверху вниз. Это просто варианты стиля, ничего не работает. Логотипы Сбера, Росатома и других компаний GPT нарисовал сам — это не наши клиенты, в настоящий сайт они не пойдут.</p>
+    <div class="ggrid tall" id="hgrid"></div>
 
     <h2 class="sec" style="margin-top:56px">Ещё восемь идей первого экрана от GPT</h2>
     <ol class="ideas" id="ideas"></ol>
@@ -188,6 +194,27 @@ document.getElementById('ggrid').innerHTML = GPT.map(g => `
   </article>`).join('');
 document.getElementById('ggrid').addEventListener('click', e => grid.dispatchEvent(new CustomEvent('pick', { detail: e.target })));
 
+const HD = [
+  { n: 'D1', f: 'h01-editorial-dark', name: 'Редакционный тёмный', note: 'Дымная материя, антиква, янтарные акценты, журнальная подача.' },
+  { n: 'D2', f: 'h02-swiss-precision', name: 'Швейцарская точность', note: 'Белый, чёрный и красный; чертёжный двигатель с размерами.' },
+  { n: 'D3', f: 'h03-glass', name: 'Матовое стекло', note: 'Индиго-градиент, стеклянные карточки, кристальное сердце.' },
+  { n: 'D4', f: 'h04-monochrome-3d', name: 'Монохромная 3D-студия', note: 'Графит, матовые объекты, почти без цвета. Спокойно и дорого.' },
+  { n: 'D5', f: 'h05-bold-color', name: 'Смелые цвета', note: 'Кобальт и коралл, глянцевое «игрушечное» 3D.' },
+  { n: 'D6', f: 'h06-cinematic', name: 'Кинематограф', note: 'Тёмные сцены как титры фильма, золото, бронзовое сердце.' },
+  { n: 'D7', f: 'h07-tech-wireframe', name: 'Технический каркас', note: 'Зелёные каркасы, интерфейс CAD-программы, механизм во вьюпорте.' },
+  { n: 'D8', f: 'h08-soft-premium', name: 'Мягкий светлый премиум', note: 'Жемчуг и хром, чёрная капля на светлом, много воздуха.' }
+];
+document.getElementById('hgrid').innerHTML = HD.map(g => `
+  <article class="gcard">
+    <a href="gpt/web/${g.f}.jpg"><img src="gpt/web/${g.f}.jpg" alt="Дизайн страницы от GPT: ${g.name}" loading="lazy"></a>
+    <div class="body">
+      <h3>${g.name}</h3>
+      <p>${g.note}</p>
+      <div class="chips">${GPARTS.map((p, i) => `<button type="button" class="chip" id="chip-${g.n}-${i}" data-v="${g.n}" data-p="${p}" aria-pressed="${(picks[g.n] || []).includes(p)}">${p}</button>`).join('')}</div>
+    </div>
+  </article>`).join('');
+document.getElementById('hgrid').addEventListener('click', e => grid.dispatchEvent(new CustomEvent('pick', { detail: e.target })));
+
 const IDEAS = [
   ['Чёрный катализатор', 'Одна непрерывная трансформация: облако → молекула → сердце → механизм → продукт. Шейдеры и морфинг.'],
   ['Лаборатория форм', 'Светлая виртуальная лаборатория: лучи собирают облако, секущие плоскости разбирают сердце на механизм.'],
@@ -201,7 +228,7 @@ const IDEAS = [
 document.getElementById('ideas').innerHTML = IDEAS.map(([t, d]) => `<li><b>${t}</b><span>${d}</span></li>`).join('');
 
 function summaryText() {
-  return [...VARIANTS.map(v => ({ n: v.n, name: v.name })), ...GPT.map(g => ({ n: g.n, name: 'GPT ' + g.name }))]
+  return [...VARIANTS.map(v => ({ n: v.n, name: v.name })), ...GPT.map(g => ({ n: g.n, name: 'GPT ' + g.name })), ...HD.map(g => ({ n: g.n, name: 'Дизайн ' + g.name }))]
     .filter(v => (picks[v.n] || []).length)
     .map(v => `${v.n} ${v.name}: ${picks[v.n].join(', ').toLowerCase()}`);
 }
