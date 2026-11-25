@@ -194,7 +194,8 @@ footer b{color:var(--ink);font-weight:700}
  h1{font-size:44px}
  .sub{margin:14px 0 18px;font-size:15px}
  .btn{height:46px;padding:0 16px;font-size:14px}
- .hud{top:auto;bottom:150px;right:var(--gut);min-width:0;font-size:9.5px}
+ .hud{top:72px;right:var(--gut);min-width:0;font-size:9.5px}
+ h1 em:after{display:none}
  .hud div{padding:5px 8px;gap:10px}.hud .hide-m{display:none}
  .stamp,.hint{display:none}
  .cap{bottom:22px;right:var(--gut)}
@@ -462,11 +463,11 @@ const pmat=new THREE.PointsMaterial({size:.03,vertexColors:true,transparent:true
 const cloud=new THREE.Points(pg,pmat);spin.add(cloud);
 // --- "molecule" bonds between major parts
 const major=parts.filter(p=>p.name!=='ball'&&!p.name.startsWith('bolt'));const pairs=[];
-major.forEach((a,i)=>{major.map((b,j)=>[j,a.home.distanceTo(b.home)]).filter(x=>x[0]!==i).sort((x,y)=>x[1]-y[1]).slice(0,2).forEach(([j])=>{if(!pairs.some(p=>p[0]===j&&p[1]===i))pairs.push([i,j])})});
+major.forEach((a,i)=>{major.map((b,j)=>[j,a.home.distanceTo(b.home)]).filter(x=>x[0]!==i).sort((x,y)=>x[1]-y[1]).slice(0,3).forEach(([j])=>{if(!pairs.some(p=>p[0]===j&&p[1]===i))pairs.push([i,j])})});
 const bg=new THREE.BufferGeometry();bg.setAttribute('position',new THREE.BufferAttribute(new Float32Array(pairs.length*6),3));
 const bonds=new THREE.LineSegments(bg,new THREE.LineBasicMaterial({color:0xff4a0f,transparent:true,depthTest:false}));spin.add(bonds);
 const ng=new THREE.BufferGeometry();ng.setAttribute('position',new THREE.BufferAttribute(new Float32Array(major.length*3),3));
-const nodes=new THREE.Points(ng,new THREE.PointsMaterial({color:0xff4a0f,size:.16,transparent:true,depthTest:false}));spin.add(nodes);
+const nodes=new THREE.Points(ng,new THREE.PointsMaterial({color:0xff4a0f,size:.24,transparent:true,depthTest:false}));spin.add(nodes);
 // --- section plane frame
 const fr=new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints([V(-4.2,-2.3,0),V(3.8,-2.3,0),V(3.8,-2.3,0),V(3.8,2.3,0),V(3.8,2.3,0),V(-4.2,2.3,0),V(-4.2,2.3,0),V(-4.2,-2.3,0),V(-4.6,0,0),V(4.2,0,0)]),new THREE.LineBasicMaterial({color:0xff4a0f,transparent:true}));spin.add(fr);
 // --- callouts
@@ -506,7 +507,7 @@ function frame(now){requestAnimationFrame(frame);const dt=Math.min(.05,(now-last
  // bonds
  bonds.visible=nodes.visible=bond>.01;if(bonds.visible){const a=bg.attributes.position.array,na=ng.attributes.position.array;pairs.forEach(([i,j],q)=>{const A=major[i].g.position,B=major[j].g.position;a.set([A.x,A.y,A.z,B.x,B.y,B.z],q*6)});major.forEach((m,i)=>na.set([m.g.position.x,m.g.position.y,m.g.position.z],i*3));bg.attributes.position.needsUpdate=ng.attributes.position.needsUpdate=true;bonds.material.opacity=bond*.9;nodes.material.opacity=bond}
  // view
- spin.rotation.set(-.38+smy*.12+.06*e,-.62+P*1.5+smx*.25+(RM?0:Math.sin(time*.3)*.04),0);
+ spin.rotation.set(-.38+smy*.12+.06*e,-.62+P*1.1+smx*.25+(RM?0:Math.sin(time*.3)*.04),0);
  const t2=2*Math.tan(camera.fov*Math.PI/360),Wd=9.6+6.6*e,Hd=5.6+3.8*e,a=camera.aspect;
  let d=portrait?Math.max(Wd/(t2*.88),Hd/(t2*a*.92)):Math.max(Wd/(t2*a*.84),Hd/(t2*.8));
  const copyK=1-sm((P-.05)/.08);d*=1+(portrait?.55:.35)*copyK;
@@ -517,22 +518,24 @@ function frame(now){requestAnimationFrame(frame);const dt=Math.min(.05,(now-last
  fr.position.z=secLocal.constant;fr.visible=cut>.01;fr.material.opacity=cut;
  // DOM: copy & hud
  const copy=$('copy');copy.style.opacity=copyK;copy.style.transform=portrait?`translateY(${-60*(1-copyK)}px)`:`translateY(calc(-46% - ${60*(1-copyK)}px))`;copy.style.pointerEvents=copyK<.3?'none':'';copy.style.visibility=copyK<.01?'hidden':'';
- $('hint').style.opacity=copyK;
- $('hCnt').textContent=vis+(e>.98?' · разнесено':'');$('hEx').textContent=(e*412.6).toFixed(1)+' мм';
+ $('hint').style.opacity=copyK;if(portrait)$('hud').style.opacity=1-copyK;else $('hud').style.opacity='';
+ $('hCnt').textContent=vis+(e>.98?' · разнесено':'');$('hEx').textContent=(e*196.3).toFixed(1)+' мм';
  $('hRot').textContent=String(Math.round(((spin.rotation.y*180/Math.PI)%360+360)%360)).padStart(3,'0')+'°';$('hSec').textContent=cut>.05?'А–А · '+Math.round(cut*100)+'%':'—';
  // callouts
  const cv=sm((e-.55)/.35);const cx=W/2,cy=H/2;const maxC=portrait?5:CO.length;
- callouts.forEach((c,i)=>{const o=i<maxC?cl(cv*1.6-i*.08):0;c.el.style.opacity=o;c.path.style.opacity=c.dot.style.opacity=o;if(o<=0){c.path.setAttribute('d','');c.dot.setAttribute('d','');return}
-  c.p.g.getWorldPosition(tv);const[sx,sy]=proj(tv);const side=portrait?(i%2?1:-1):(sx>=cx?1:-1),up=c.up,len=portrait?34:54+(i%3)*14,ex=sx+side*len*.7,ey=sy+up*len,lx=ex+side*(portrait?16:34);
-  c.path.setAttribute('d',`M${sx} ${sy}L${ex} ${ey}L${lx} ${ey}`);c.dot.setAttribute('d',`M${sx-3} ${sy}a3 3 0 1 0 6 0a3 3 0 1 0 -6 0`);
-  const w=c.el.offsetWidth,h=c.el.offsetHeight;let X=side>0?lx:lx-w;X=cl(X,8,W-w-8);c.el.style.transform=`translate(${X}px,${ey-h/2}px)`});
+ const act=[];callouts.forEach((c,i)=>{const o=i<maxC?cl(cv*1.6-i*.08):0;c.el.style.opacity=o;c.path.style.opacity=c.dot.style.opacity=o;if(o<=0){c.path.setAttribute('d','');c.dot.setAttribute('d','');return}
+  c.p.g.getWorldPosition(tv);const[sx,sy]=proj(tv);const side=portrait?(i%2?1:-1):(sx>=cx?1:-1),len=portrait?34:54+(i%3)*14,ex=sx+side*len*.7,lx=ex+side*(portrait?16:34);
+  const w=c.el.offsetWidth,h=c.el.offsetHeight;act.push({c,sx,sy,ex,lx,ey:sy+c.up*len,w,h,X:cl(side>0?lx:lx-w,8,W-w-8)})});
+ act.sort((a,b)=>a.ey-b.ey);for(let it=0;it<4;it++)for(let a=0;a<act.length;a++)for(let b=a+1;b<act.length;b++){const A=act[a],B=act[b];
+  if(A.X<B.X+B.w+6&&B.X<A.X+A.w+6){const ov=(A.ey+A.h/2+6)-(B.ey-B.h/2);if(ov>0){A.ey-=ov/2;B.ey+=ov/2}}}
+ act.forEach(({c,sx,sy,ex,lx,ey,h,X})=>{ey=cl(ey,80+h/2,H-20-h/2);c.path.setAttribute('d',`M${sx} ${sy}L${ex} ${ey}L${lx} ${ey}`);c.dot.setAttribute('d',`M${sx-3} ${sy}a3 3 0 1 0 6 0a3 3 0 1 0 -6 0`);c.el.style.transform=`translate(${X}px,${ey-h/2}px)`});
  // dimension line: overall length
  const dv=P>.16?sm((P-.17)/.05):0;if(dv>0){const mo=parts.find(p=>p.name==='motor').g,le=parts.find(p=>p.name==='lens').g;
-  tv.set(-.8,0,0);mo.localToWorld(tv);tv2.set(.12,0,0);le.localToWorld(tv2);const A=proj(tv),B=proj(tv2);let nx=-(B[1]-A[1]),ny=B[0]-A[0];const nl=Math.hypot(nx,ny)||1;nx/=nl;ny/=nl;if((portrait?nx:ny)<0){nx=-nx;ny=-ny}if(portrait&&nx>0){nx=-nx;ny=-ny}
-  const o=portrait?110:150,A2=[A[0]+nx*o,A[1]+ny*o],B2=[B[0]+nx*o,B[1]+ny*o],ux=(B[0]-A[0])/nl,uy=(B[1]-A[1])/nl,ar=8;
+  tv.set(-.8,0,0);mo.localToWorld(tv);tv2.set(.12,0,0);le.localToWorld(tv2);const L=(tv.distanceTo(tv2)*28.6).toFixed(1),A=proj(tv),B=proj(tv2);let nx=-(B[1]-A[1]),ny=B[0]-A[0];const nl=Math.hypot(nx,ny)||1;nx/=nl;ny/=nl;if((portrait?nx:ny)<0){nx=-nx;ny=-ny}if(portrait&&nx>0){nx=-nx;ny=-ny}
+  const o=portrait?165:150,A2=[A[0]+nx*o,A[1]+ny*o],B2=[B[0]+nx*o,B[1]+ny*o],ux=(B[0]-A[0])/nl,uy=(B[1]-A[1])/nl,ar=8;
   dimP.setAttribute('d',`M${A[0]+nx*20} ${A[1]+ny*20}L${A2[0]+nx*10} ${A2[1]+ny*10}M${B[0]+nx*20} ${B[1]+ny*20}L${B2[0]+nx*10} ${B2[1]+ny*10}M${A2[0]} ${A2[1]}L${B2[0]} ${B2[1]}`);
   dimA.setAttribute('d',`M${A2[0]+ux*ar+nx*4} ${A2[1]+uy*ar+ny*4}L${A2[0]} ${A2[1]}L${A2[0]+ux*ar-nx*4} ${A2[1]+uy*ar-ny*4}M${B2[0]-ux*ar+nx*4} ${B2[1]-uy*ar+ny*4}L${B2[0]} ${B2[1]}L${B2[0]-ux*ar-nx*4} ${B2[1]-uy*ar-ny*4}`);
-  const L=(tv.distanceTo(tv2)*28.6).toFixed(1);const mxp=(A2[0]+B2[0])/2,myp=(A2[1]+B2[1])/2;let ang=Math.atan2(uy,ux)*180/Math.PI;if(ang>90)ang-=180;if(ang<-90)ang+=180;
+  const mxp=(A2[0]+B2[0])/2,myp=(A2[1]+B2[1])/2;let ang=Math.atan2(uy,ux)*180/Math.PI;if(ang>90)ang-=180;if(ang<-90)ang+=180;
   dimT.textContent='L = '+L+' мм';dimT.setAttribute('transform',`translate(${mxp+nx*14},${myp+ny*14}) rotate(${ang})`);dimT.setAttribute('text-anchor','middle')}
  [dimP,dimA,dimT].forEach(x=>x.style.opacity=dv*.9);
  renderer.render(scene,camera)}
