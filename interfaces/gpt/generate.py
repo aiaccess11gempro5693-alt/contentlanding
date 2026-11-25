@@ -72,12 +72,12 @@ def main():
         if os.path.exists(path):
             log(f"{job['id']}: уже есть, пропускаю")
             continue
-        prompt = base + "\n\n" + job["prompt"] + "\n\n" + jobs["image_suffix"]
+        prompt = base + "\n\n" + job["prompt"] + "\n\n" + job.get("suffix", jobs["image_suffix"])
         for model in image_models:
             try:
                 t = time.time()
                 res = call("/images/generations", {
-                    "model": model, "prompt": prompt, "size": jobs.get("size", "1536x1024"),
+                    "model": model, "prompt": prompt, "size": job.get("size", jobs.get("size", "1536x1024")),
                     "quality": jobs.get("quality", "high"), "n": 1,
                 })
                 item = res["data"][0]

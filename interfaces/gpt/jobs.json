@@ -1,21 +1,105 @@
 {
-  "image_models": ["gpt-image-1.5", "gpt-image-1", "dall-e-3"],
-  "chat_models": ["gpt-5.1", "gpt-5", "gpt-4.1", "gpt-4o"],
+  "image_models": [
+    "gpt-image-1.5",
+    "gpt-image-1",
+    "dall-e-3"
+  ],
+  "chat_models": [
+    "gpt-5.1",
+    "gpt-5",
+    "gpt-4.1",
+    "gpt-4o"
+  ],
   "size": "1536x1024",
   "quality": "high",
   "base": "You are the art director of a top digital studio (Awwwards Site of the Day level). We are designing the landing page of a full-cycle content studio called «Катализ», part of the company «Центр Бизнес Технологий». The studio makes any content: print and packaging, videos, interactive trainers, AI avatars and especially complex, precise 3D modelling (molecules, anatomy, mechanisms that assemble and disassemble). An AI production pipeline makes work 2–4x faster and the saved time goes into details. Main slogan: «Точность в каждой детали». Hero mechanic: on scroll, a mass of «dark matter» takes different shapes: cloud → molecule → heart → mechanism (explodes into parts and reassembles) → product. Audience: marketing and training departments of large companies (mostly pharma, but the site must NOT look pharmaceutical). Site language: Russian. Do not use capsules, pills, medical crosses, doctors or stock photos.",
   "image_suffix": "Render a high-fidelity UI design mockup of a desktop landing page screen, 1440x900 proportions, straight-on, no browser frame, no device. Pixel-perfect, award-winning web design, realistic UI typography. Keep on-screen text minimal and large; use the Russian headline «Точность в каждой детали» and the wordmark «Катализ» exactly, other text can be short.",
   "images": [
-    {"id": "g01-dark-matter", "prompt": "Direction «Dark matter»: near-black background, a cloud of tens of thousands of glowing particles in the centre caught mid-way assembling into an anatomical heart. Thin elegant typography, monochrome plus one icy-blue accent, minimal navigation, stage indicator 03/05, two pill buttons."},
-    {"id": "g02-exploded", "prompt": "Direction «Precision in details / exploded view»: light engineering-blueprint style, fine technical grid, drawing hairlines, dimension callouts, monospace labels. In the centre a photoreal metal mechanism of ~50 parts in exploded view with callouts like «Шестерня Z=24 · допуск 0.01 мм». One signal colour: safety orange."},
-    {"id": "g03-liquid-metal", "prompt": "Direction «Liquid metal»: premium and calm. A chrome liquid mass with iridescent reflections on a graphite background, flowing from a drop into a molecule. Large elegant high-contrast serif headline plus clean grotesk, copper accent, a magnetic chrome pill button."},
-    {"id": "g04-laboratory", "prompt": "Direction «Laboratory»: warm off-white background, acid lime and violet accents, strict Swiss grid, bold geometric grotesk headings, scientific annotations and section numbers. A glossy clay-render object made of hundreds of spheres assembled into a molecule. A side panel like an instrument readout showing the current stage."},
-    {"id": "g05-conveyor", "prompt": "Direction «Factory conveyor»: brutalist, black, off-white and hot orange. Huge condensed uppercase typography, ticker tapes, hazard stripes, production timer. Hero is a horizontal conveyor belt where a block of dark matter passes through stations and turns into new forms. Counter «3 недели → 5 дней»."},
-    {"id": "g06-hologram", "prompt": "Direction «Hologram»: deep navy space, neon cyan and magenta, HUD interface with corner brackets, telemetry readouts, scan percentage. An object of thousands of glowing voxels assembling into a heart, a scanning plane passing through it."},
-    {"id": "g07-free-1", "prompt": "Invent your own, completely different and unexpected art direction for this hero (not dark-matter particles, not chrome, not blueprint, not neon). Make it memorable and premium."},
-    {"id": "g08-ui-kit", "prompt": "Instead of a full page, draw a UI kit sheet for the most premium version of this studio site in a dark style: primary button (default / hover / pressed), secondary button, direction card, case card, top navigation, marquee of formats, scroll progress indicator 01/05, contact form. Label each component in small text."}
+    {
+      "id": "g01-dark-matter",
+      "prompt": "Direction «Dark matter»: near-black background, a cloud of tens of thousands of glowing particles in the centre caught mid-way assembling into an anatomical heart. Thin elegant typography, monochrome plus one icy-blue accent, minimal navigation, stage indicator 03/05, two pill buttons."
+    },
+    {
+      "id": "g02-exploded",
+      "prompt": "Direction «Precision in details / exploded view»: light engineering-blueprint style, fine technical grid, drawing hairlines, dimension callouts, monospace labels. In the centre a photoreal metal mechanism of ~50 parts in exploded view with callouts like «Шестерня Z=24 · допуск 0.01 мм». One signal colour: safety orange."
+    },
+    {
+      "id": "g03-liquid-metal",
+      "prompt": "Direction «Liquid metal»: premium and calm. A chrome liquid mass with iridescent reflections on a graphite background, flowing from a drop into a molecule. Large elegant high-contrast serif headline plus clean grotesk, copper accent, a magnetic chrome pill button."
+    },
+    {
+      "id": "g04-laboratory",
+      "prompt": "Direction «Laboratory»: warm off-white background, acid lime and violet accents, strict Swiss grid, bold geometric grotesk headings, scientific annotations and section numbers. A glossy clay-render object made of hundreds of spheres assembled into a molecule. A side panel like an instrument readout showing the current stage."
+    },
+    {
+      "id": "g05-conveyor",
+      "prompt": "Direction «Factory conveyor»: brutalist, black, off-white and hot orange. Huge condensed uppercase typography, ticker tapes, hazard stripes, production timer. Hero is a horizontal conveyor belt where a block of dark matter passes through stations and turns into new forms. Counter «3 недели → 5 дней»."
+    },
+    {
+      "id": "g06-hologram",
+      "prompt": "Direction «Hologram»: deep navy space, neon cyan and magenta, HUD interface with corner brackets, telemetry readouts, scan percentage. An object of thousands of glowing voxels assembling into a heart, a scanning plane passing through it."
+    },
+    {
+      "id": "g07-free-1",
+      "prompt": "Invent your own, completely different and unexpected art direction for this hero (not dark-matter particles, not chrome, not blueprint, not neon). Make it memorable and premium."
+    },
+    {
+      "id": "g08-ui-kit",
+      "prompt": "Instead of a full page, draw a UI kit sheet for the most premium version of this studio site in a dark style: primary button (default / hover / pressed), secondary button, direction card, case card, top navigation, marquee of formats, scroll progress indicator 01/05, contact form. Label each component in small text."
+    },
+    {
+      "id": "h01-editorial-dark",
+      "prompt": "Landing page design direction — Editorial dark: huge thin display type, asymmetric magazine grid, the dark matter as a soft smoky sculpture, warm white text on near-black, one amber accent.",
+      "size": "1024x1536",
+      "suffix": "Render ONE tall full-page website design mockup of this landing page, shown as a long scroll screenshot (desktop width), top to bottom: navigation + hero with the dark-matter object, manifesto line, 4 direction cards (Визуал · Движение и 3D · Интерактив · Цифровые люди), a 3D case showcase, client logos row as text, final call to action. Award-winning, pixel-perfect UI, real typographic hierarchy, consistent design system. No browser frame, no device. Text in Russian, short and large; use «Катализ» and «Точность в каждой детали» exactly."
+    },
+    {
+      "id": "h02-swiss-precision",
+      "prompt": "Landing page design direction — Swiss precision: white background, black type, strict 12-column grid, hairline rules, a single red accent, the object is a crisp black exploded mechanism with dimension lines.",
+      "size": "1024x1536",
+      "suffix": "Render ONE tall full-page website design mockup of this landing page, shown as a long scroll screenshot (desktop width), top to bottom: navigation + hero with the dark-matter object, manifesto line, 4 direction cards (Визуал · Движение и 3D · Интерактив · Цифровые люди), a 3D case showcase, client logos row as text, final call to action. Award-winning, pixel-perfect UI, real typographic hierarchy, consistent design system. No browser frame, no device. Text in Russian, short and large; use «Катализ» and «Точность в каждой детали» exactly."
+    },
+    {
+      "id": "h03-glass",
+      "prompt": "Landing page design direction — Frosted glass: deep gradient (indigo to teal), glassmorphism cards with blur and light edges, the dark matter as a glass-like translucent heart refracting light.",
+      "size": "1024x1536",
+      "suffix": "Render ONE tall full-page website design mockup of this landing page, shown as a long scroll screenshot (desktop width), top to bottom: navigation + hero with the dark-matter object, manifesto line, 4 direction cards (Визуал · Движение и 3D · Интерактив · Цифровые люди), a 3D case showcase, client logos row as text, final call to action. Award-winning, pixel-perfect UI, real typographic hierarchy, consistent design system. No browser frame, no device. Text in Russian, short and large; use «Катализ» and «Точность в каждой детали» exactly."
+    },
+    {
+      "id": "h04-monochrome-3d",
+      "prompt": "Landing page design direction — Monochrome 3D studio: graphite grey everything, soft studio lighting, matte clay renders of molecule, heart and gears, almost no color, very calm and expensive.",
+      "size": "1024x1536",
+      "suffix": "Render ONE tall full-page website design mockup of this landing page, shown as a long scroll screenshot (desktop width), top to bottom: navigation + hero with the dark-matter object, manifesto line, 4 direction cards (Визуал · Движение и 3D · Интерактив · Цифровые люди), a 3D case showcase, client logos row as text, final call to action. Award-winning, pixel-perfect UI, real typographic hierarchy, consistent design system. No browser frame, no device. Text in Russian, short and large; use «Катализ» and «Точность в каждой детали» exactly."
+    },
+    {
+      "id": "h05-bold-color",
+      "prompt": "Landing page design direction — Bold colour blocks: large flat blocks of saturated cobalt blue and coral, playful but premium, the object rendered as glossy toy-like 3D, rounded geometric typography.",
+      "size": "1024x1536",
+      "suffix": "Render ONE tall full-page website design mockup of this landing page, shown as a long scroll screenshot (desktop width), top to bottom: navigation + hero with the dark-matter object, manifesto line, 4 direction cards (Визуал · Движение и 3D · Интерактив · Цифровые люди), a 3D case showcase, client logos row as text, final call to action. Award-winning, pixel-perfect UI, real typographic hierarchy, consistent design system. No browser frame, no device. Text in Russian, short and large; use «Катализ» and «Точность в каждой детали» exactly."
+    },
+    {
+      "id": "h06-cinematic",
+      "prompt": "Landing page design direction — Cinematic: full-bleed dramatic dark scenes like a film title sequence, letterbox framing, the object half-lit with rim light, subtitles-style captions, gold accent.",
+      "size": "1024x1536",
+      "suffix": "Render ONE tall full-page website design mockup of this landing page, shown as a long scroll screenshot (desktop width), top to bottom: navigation + hero with the dark-matter object, manifesto line, 4 direction cards (Визуал · Движение и 3D · Интерактив · Цифровые люди), a 3D case showcase, client logos row as text, final call to action. Award-winning, pixel-perfect UI, real typographic hierarchy, consistent design system. No browser frame, no device. Text in Russian, short and large; use «Катализ» and «Точность в каждой детали» exactly."
+    },
+    {
+      "id": "h07-tech-wireframe",
+      "prompt": "Landing page design direction — Tech wireframe: dark background with thin luminous green wireframes, CAD-like viewport UI with axes and coordinates, the heart and mechanism as wireframe meshes.",
+      "size": "1024x1536",
+      "suffix": "Render ONE tall full-page website design mockup of this landing page, shown as a long scroll screenshot (desktop width), top to bottom: navigation + hero with the dark-matter object, manifesto line, 4 direction cards (Визуал · Движение и 3D · Интерактив · Цифровые люди), a 3D case showcase, client logos row as text, final call to action. Award-winning, pixel-perfect UI, real typographic hierarchy, consistent design system. No browser frame, no device. Text in Russian, short and large; use «Катализ» and «Точность в каждой детали» exactly."
+    },
+    {
+      "id": "h08-soft-premium",
+      "prompt": "Landing page design direction — Soft premium light: off-white and pale silver, chrome and pearl materials, generous whitespace, elegant serif headlines, the dark matter as a polished black droplet contrasting the light page.",
+      "size": "1024x1536",
+      "suffix": "Render ONE tall full-page website design mockup of this landing page, shown as a long scroll screenshot (desktop width), top to bottom: navigation + hero with the dark-matter object, manifesto line, 4 direction cards (Визуал · Движение и 3D · Интерактив · Цифровые люди), a 3D case showcase, client logos row as text, final call to action. Award-winning, pixel-perfect UI, real typographic hierarchy, consistent design system. No browser frame, no device. Text in Russian, short and large; use «Катализ» and «Точность в каждой детали» exactly."
+    }
   ],
   "texts": [
-    {"id": "t01-hero-ideas", "prompt": "Предложи 8 принципиально разных концепций hero-блока для этого лендинга, где материя при скролле принимает разные образы. Для каждой: название, визуальный стиль, механика скролла по шагам, технология реализации (three.js / шейдер / видео / Spline), чем запомнится, риск. Ответ на русском, кратко и конкретно."}
+    {
+      "id": "t01-hero-ideas",
+      "prompt": "Предложи 8 принципиально разных концепций hero-блока для этого лендинга, где материя при скролле принимает разные образы. Для каждой: название, визуальный стиль, механика скролла по шагам, технология реализации (three.js / шейдер / видео / Spline), чем запомнится, риск. Ответ на русском, кратко и конкретно."
+    }
   ]
 }
