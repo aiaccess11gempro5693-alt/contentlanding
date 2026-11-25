@@ -1,0 +1,39 @@
+name: GPT v2 — концепция и дизайны
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [claude/exciting-ritchie-3g0i71]
+    paths:
+      - interfaces/gpt/v2/brief.md
+      - interfaces/gpt/v2/run.py
+      - .github/workflows/gpt-v2.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gpt-v2
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: GPT продумывает и рисует
+        env:
+          COMETAPI: ${{ secrets.COMETAPI }}
+        run: python interfaces/gpt/v2/run.py
+      - name: Сохранить результаты в ветку
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add interfaces/gpt/v2/out
+          git commit -m "GPT v2: концепция и дизайны" || exit 0
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
