@@ -61,7 +61,7 @@ a{color:inherit;text-decoration:none}
 .eyebrow:before{content:"";width:28px;height:1px;background:var(--acc)}
 h1{font-weight:600;font-size:clamp(42px,6.3vw,98px);line-height:.95;letter-spacing:-.045em}
 h1 em{font-style:normal;position:relative;color:var(--acc)}
-h1 em:after{content:"± 0.01";position:absolute;left:calc(100% + 14px);bottom:.32em;font:500 11px var(--mono);letter-spacing:.06em;color:var(--ink2);border-bottom:1px solid var(--ink2);padding-bottom:2px}
+h1 em:after{content:"± 0.01";position:absolute;left:calc(100% + 14px);bottom:.32em;font:500 11px var(--mono);letter-spacing:.06em;color:var(--ink2);border-bottom:1px solid var(--ink2);padding-bottom:2px;white-space:nowrap}
 .sub{margin:26px 0 34px;font-size:clamp(16px,1.3vw,19px);color:var(--ink2);max-width:470px}
 .ctas{display:flex;gap:14px;flex-wrap:wrap}
 .hud{position:absolute;right:var(--gut);top:92px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line);background:rgba(242,244,246,.7);min-width:230px}
@@ -177,8 +177,8 @@ h3.t{font-size:clamp(32px,4.4vw,64px);font-weight:600;letter-spacing:-.04em;line
 @keyframes mq{to{transform:translateX(-50%)}}
 /* cta */
 .cta{text-align:left;overflow:hidden}
-.cgear{position:absolute;right:calc(var(--gut) - 40px);top:50%;width:min(44vw,560px);transform:translateY(-42%);pointer-events:none}
-.cgear .rot{transform-origin:50% 50%;animation:spin 60s linear infinite}
+.cgear{position:absolute;right:-30px;top:50%;width:min(34vw,480px);transform:translateY(-36%);pointer-events:none;opacity:.7}
+.cgear .rot{transform-origin:0 0;transform-box:view-box;animation:spin 60s linear infinite}
 .cgear *{vector-effect:non-scaling-stroke}
 .cta>*:not(.cgear){position:relative}
 .cta h3{font-size:clamp(46px,8.4vw,140px);font-weight:600;letter-spacing:-.05em;line-height:.92}
@@ -501,7 +501,7 @@ function frame(now){requestAnimationFrame(frame);const dt=Math.min(.05,(now-last
  const rect=hero.getBoundingClientRect(),p=cl(-rect.top/(rect.height-H));ps+=RM?p-ps:(p-ps)*(1-Math.exp(-(now-last0)/1000*7));const P=ps;
  smx+=(mx-smx)*.05;smy+=(my-smy)*.05;
  // phases
- const f=ease(cl(P/.14));let e=0,bond=0,cut=0;
+ const f=ease(cl(P/.11));let e=0,bond=0,cut=0;
  if(P>.16&&P<.34){const t=(P-.16)/.18;e=.14*Math.sin(Math.PI*t);bond=sm(t*5)*sm((1-t)*5)}
  else if(P>=.34&&P<.52){const t=(P-.34)/.18;cut=sm(t/.35)*(1-sm((t-.82)/.18))}
  else if(P>=.52&&P<.8)e=ease(cl((P-.52)/.17));else if(P>=.8)e=1-ease(cl((P-.8)/.15));
@@ -520,7 +520,7 @@ function frame(now){requestAnimationFrame(frame);const dt=Math.min(.05,(now-last
  spin.rotation.set(-.38+smy*.12+.06*e,-.62+P*1.1+smx*.25+(RM?0:Math.sin(time*.3)*.04),0);
  const t2=2*Math.tan(camera.fov*Math.PI/360),Wd=9.6+6.6*e,Hd=5.6+3.8*e,a=camera.aspect;
  let d=portrait?Math.max(Wd/(t2*.88),Hd/(t2*a*.92)):Math.max(Wd/(t2*a*.84),Hd/(t2*.8));
- const copyK=1-sm((P-.05)/.08);d*=1+(portrait?.55:.35)*copyK;
+ const copyK=1-sm((P-.1)/.07);d*=1+(portrait?.55:.35)*copyK;
  camera.position.set(0,0,d);camera.lookAt(0,0,0);
  if(portrait)camera.setViewOffset(W,H,0,-H*.17*copyK,W,H);else camera.setViewOffset(W,H,-W*.2*copyK,0,W,H);
  camera.updateProjectionMatrix();root.updateMatrixWorld(true);
@@ -542,7 +542,7 @@ function frame(now){requestAnimationFrame(frame);const dt=Math.min(.05,(now-last
  // dimension line: overall length
  const dv=P>.16?sm((P-.17)/.05):0;if(dv>0){const mo=parts.find(p=>p.name==='motor').g,le=parts.find(p=>p.name==='lens').g;
   tv.set(-.8,0,0);mo.localToWorld(tv);tv2.set(.12,0,0);le.localToWorld(tv2);const L=(tv.distanceTo(tv2)*28.6).toFixed(1),A=proj(tv),B=proj(tv2);let nx=-(B[1]-A[1]),ny=B[0]-A[0];const nl=Math.hypot(nx,ny)||1;nx/=nl;ny/=nl;if((portrait?nx:ny)<0){nx=-nx;ny=-ny}if(portrait&&nx>0){nx=-nx;ny=-ny}
-  const o=portrait?165:150,A2=[A[0]+nx*o,A[1]+ny*o],B2=[B[0]+nx*o,B[1]+ny*o],ux=(B[0]-A[0])/nl,uy=(B[1]-A[1])/nl,ar=8;
+  const o=portrait?145:150,A2=[A[0]+nx*o,A[1]+ny*o],B2=[B[0]+nx*o,B[1]+ny*o],ux=(B[0]-A[0])/nl,uy=(B[1]-A[1])/nl,ar=8;
   dimP.setAttribute('d',`M${A[0]+nx*20} ${A[1]+ny*20}L${A2[0]+nx*10} ${A2[1]+ny*10}M${B[0]+nx*20} ${B[1]+ny*20}L${B2[0]+nx*10} ${B2[1]+ny*10}M${A2[0]} ${A2[1]}L${B2[0]} ${B2[1]}`);
   dimA.setAttribute('d',`M${A2[0]+ux*ar+nx*4} ${A2[1]+uy*ar+ny*4}L${A2[0]} ${A2[1]}L${A2[0]+ux*ar-nx*4} ${A2[1]+uy*ar-ny*4}M${B2[0]-ux*ar+nx*4} ${B2[1]-uy*ar+ny*4}L${B2[0]} ${B2[1]}L${B2[0]-ux*ar-nx*4} ${B2[1]-uy*ar-ny*4}`);
   const mxp=(A2[0]+B2[0])/2,myp=(A2[1]+B2[1])/2;let ang=Math.atan2(uy,ux)*180/Math.PI;if(ang>90)ang-=180;if(ang<-90)ang+=180;
