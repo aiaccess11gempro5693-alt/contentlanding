@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Катализ — конвейер</title>
+<meta name="description" content="Катализ — студия Центра Бизнес Технологий. Вариант 05: конвейер.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=JetBrains+Mono:wght@400;700&family=IBM+Plex+Sans:wght@400;500&display=swap&subset=cyrillic" rel="stylesheet">
+<style>
+:root{--ink:#0c0c0b;--ink2:#161614;--paper:#ece9e1;--sig:#ff5b1f;--mute:#8c887e;--ln:rgba(236,233,225,.13);--lnd:rgba(12,12,11,.16);
+--disp:'Oswald','Arial Narrow',Impact,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace;--sans:'IBM Plex Sans',system-ui,sans-serif;--gut:clamp(16px,3vw,44px)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--ink)}
+body{background:var(--ink);color:var(--paper);font:400 16px/1.5 var(--sans);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+::selection{background:var(--sig);color:var(--ink)}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.gridbg{background-image:linear-gradient(var(--ln) 1px,transparent 1px),linear-gradient(90deg,var(--ln) 1px,transparent 1px);background-size:calc((100% - 2*var(--gut))/12) 100%,calc((100% - 2*var(--gut))/12) 100%;background-position:var(--gut) 0}
+/* ---------- header ---------- */
+.hdr{position:fixed;inset:0 0 auto 0;z-index:50;height:56px;display:flex;align-items:center;gap:24px;padding:0 var(--gut);background:rgba(12,12,11,.92);border-bottom:1px solid var(--ln);backdrop-filter:blur(6px)}
+.wm{display:flex;align-items:baseline;gap:10px;white-space:nowrap}
+.wm b{font:700 24px/1 var(--disp);letter-spacing:.04em;text-transform:uppercase}
+.wm b i{font-style:normal;color:var(--sig)}
+.wm span{font:400 10px/1.2 var(--mono);color:var(--mute);letter-spacing:.06em;text-transform:uppercase;max-width:150px;white-space:normal}
+.nav{display:flex;gap:22px;margin-left:auto}
+.nav a{font:500 13px/1 var(--mono);text-transform:uppercase;letter-spacing:.06em;color:#bdb9ae;position:relative;padding:6px 0}
+.nav a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:2px;background:var(--sig);transition:right .25s}
+.nav a:hover{color:var(--paper)}.nav a:hover::after{right:0}
+.hbtn{font:700 13px/1 var(--mono);text-transform:uppercase;letter-spacing:.06em;background:var(--sig);color:var(--ink);padding:11px 14px;border:2px solid var(--sig);transition:background .2s,color .2s}
+.hbtn:hover{background:var(--ink);color:var(--sig)}
+.burger{display:none;margin-left:auto;font:700 12px/1 var(--mono);letter-spacing:.08em;border:1px solid var(--ln);padding:9px 10px}
+.mnav{display:none}
+/* ---------- conveyor hero ---------- */
+.line{position:relative;height:520vh;background:var(--ink)}
+.pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+.pin .gridbg{position:absolute;inset:0;opacity:.7}
+.track{position:absolute;top:0;left:0;height:100%;width:500%;display:flex;will-change:transform}
+.st{position:relative;width:20%;height:100%;flex:none}
+.gate{position:absolute;left:var(--ox);top:calc(var(--oy) - var(--gh)/2 - 40px);height:calc(var(--gh) + 40px);width:calc(var(--gh)*.9);transform:translateX(-50%)}
+.gate::before,.gate::after{content:"";position:absolute;top:0;bottom:0;width:20px;background:repeating-linear-gradient(-45deg,var(--sig) 0 10px,var(--ink) 10px 20px);border:2px solid var(--paper)}
+.gate::before{left:0}.gate::after{right:0}
+.gate .beam{position:absolute;left:-14px;right:-14px;top:0;height:38px;background:var(--paper);color:var(--ink);display:flex;justify-content:space-between;align-items:center;padding:0 12px;font:700 11px/1 var(--mono);letter-spacing:.1em}
+.gate .beam i{width:9px;height:9px;background:#3a3a36;border-radius:50%;font-style:normal;transition:background .1s}
+.gate .scan{position:absolute;left:20px;right:20px;top:38px;height:2px;background:var(--sig);box-shadow:0 0 18px 2px var(--sig);opacity:0}
+.gate.hit .beam{background:var(--sig)}
+.gate.hit .beam i{background:var(--paper)}
+.gate.on .beam i{background:var(--sig);box-shadow:0 0 10px var(--sig)}
+.gate.hit .scan{animation:scan .7s ease-out}
+@keyframes scan{0%{opacity:1;top:38px}100%{opacity:0;top:100%}}
+.hero{position:absolute;left:var(--gut);top:calc(56px + 4vh);width:min(56%,820px)}
+.eyebrow{display:inline-flex;gap:10px;align-items:center;font:700 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--sig)}
+.eyebrow::before{content:"";width:28px;height:2px;background:var(--sig)}
+.h1{font:700 clamp(48px,8.2vw,150px)/.86 var(--disp);text-transform:uppercase;letter-spacing:-.01em;margin:18px 0 22px}
+.h1 em{font-style:normal;color:transparent;-webkit-text-stroke:2px var(--paper)}
+.lead{max-width:470px;color:#c9c5ba;font-size:clamp(15px,1.15vw,18px);line-height:1.45}
+.ctas{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
+.btn{position:relative;display:inline-flex;align-items:center;gap:14px;font:700 15px/1 var(--mono);text-transform:uppercase;letter-spacing:.06em;padding:18px 22px;border:2px solid var(--paper);transition:transform .15s,box-shadow .15s,background .2s,color .2s}
+.btn.pri{background:var(--sig);border-color:var(--sig);color:var(--ink);box-shadow:6px 6px 0 var(--paper)}
+.btn.pri:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 var(--paper)}
+.btn.pri:active{transform:translate(6px,6px);box-shadow:0 0 0 var(--paper)}
+.btn.sec:hover{background:var(--paper);color:var(--ink)}
+.btn .ar{display:inline-block;transition:transform .2s}.btn:hover .ar{transform:translateX(5px)}
+.slabel{position:absolute;left:var(--gut);top:50%;transform:translateY(-58%);width:min(44%,640px);opacity:.15;transition:opacity .4s}
+.st.act .slabel{opacity:1}
+.slabel .num{font:700 clamp(72px,12vw,210px)/.8 var(--disp);color:transparent;-webkit-text-stroke:2px var(--sig)}
+.slabel h2{font:700 clamp(44px,7vw,124px)/.88 var(--disp);text-transform:uppercase;margin:14px 0 18px}
+.slabel p{font:500 clamp(15px,1.3vw,20px)/1.35 var(--sans);color:#d6d2c7;max-width:420px;border-left:3px solid var(--sig);padding-left:14px}
+.slabel .k{display:block;margin-bottom:6px;color:var(--mute)}
+.st0tag{position:absolute;left:var(--ox);top:calc(var(--oy) + var(--gh)/2 - 2px);transform:translate(-50%,0);font:700 11px/1 var(--mono);letter-spacing:.1em;color:var(--sig);white-space:nowrap;display:none}
+#gl{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3}
+.belt{position:absolute;left:0;right:0;top:calc(var(--oy) + var(--gh)/2);bottom:0;z-index:2;background:var(--ink2);border-top:2px solid var(--paper)}
+.belt .surf{height:26px;background:repeating-linear-gradient(90deg,#2b2b28 0 3px,#1b1b19 3px 46px);border-bottom:2px solid #000;will-change:background-position}
+.belt .rol{height:14px;background:radial-gradient(circle at 23px 7px,#55534d 0 5px,transparent 6px) 0 0/46px 14px repeat-x;opacity:.9}
+.tape{margin-top:10px;background:var(--sig);color:var(--ink);border:0;font:700 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;padding:7px 0}
+.tape span{padding:0 14px}.tape span:nth-child(odd){background:var(--ink);color:var(--sig);padding:3px 8px}
+.hud{position:absolute;left:var(--gut);right:var(--gut);bottom:max(14px,2.4vh);z-index:4;display:grid;grid-template-columns:minmax(180px,auto) minmax(340px,auto) 1fr;gap:12px;align-items:stretch}
+.hc{background:var(--ink);border:1px solid #3a3935;padding:10px 14px;font-family:var(--mono)}
+.hc .t{font-size:10px;letter-spacing:.12em;color:var(--mute);text-transform:uppercase}
+.hc .v{font:700 clamp(18px,2.1vw,30px)/1.1 var(--mono);color:var(--paper);font-variant-numeric:tabular-nums;margin-top:4px}
+.hc .v s{text-decoration:line-through;text-decoration-color:var(--sig);color:var(--mute);font-weight:400}
+.hc .v b{color:var(--sig);white-space:nowrap}.hc .v{white-space:nowrap}
+.bar{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-top:8px}
+.bar i{height:8px;background:#2c2c29;position:relative;overflow:hidden}
+.bar i::after{content:"";position:absolute;inset:0;background:var(--sig);transform:scaleX(var(--f,0));transform-origin:left}
+.hint{position:absolute;right:var(--gut);top:calc(56px + 4vh);z-index:4;color:var(--mute);text-align:right}
+.hint b{color:var(--sig);animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+/* ---------- marquee ---------- */
+.mq{overflow:hidden;white-space:nowrap;border-block:2px solid var(--ink)}
+.mq-t{display:inline-flex;width:max-content;animation:mq var(--d,30s) linear infinite}
+.mq.rev .mq-t{animation-direction:reverse}
+@keyframes mq{to{transform:translateX(-50%)}}
+/* ---------- sections ---------- */
+section.blk{position:relative;padding:clamp(72px,10vw,150px) var(--gut)}
+.paper{background:var(--paper);color:var(--ink)}
+.shead{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;border-bottom:2px solid currentColor;padding-bottom:16px;margin-bottom:clamp(28px,4vw,56px)}
+.shead h2{font:700 clamp(40px,6vw,96px)/.9 var(--disp);text-transform:uppercase}
+.shead .mono{opacity:.6}
+.manif{font:700 clamp(36px,6.3vw,112px)/.95 var(--disp);text-transform:uppercase;letter-spacing:-.005em}
+.manif span{opacity:.12;transition:opacity .25s,color .25s}
+.manif span.on{opacity:1}
+.manif span.hl.on{color:var(--sig)}
+.band{background:var(--sig);color:var(--ink);font:700 clamp(28px,4vw,60px)/1 var(--disp);text-transform:uppercase;padding:16px 0}
+.band span{padding:0 28px}.band span::after{content:"■";font-size:.5em;vertical-align:middle;margin-left:56px}
+.nums{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--ln);border-left:1px solid var(--ln)}
+.cell{border-right:1px solid var(--ln);border-bottom:1px solid var(--ln);padding:28px 22px 24px;min-height:260px;display:flex;flex-direction:column;justify-content:space-between;position:relative}
+.cell .n{font:700 clamp(64px,8vw,136px)/.9 var(--disp);font-variant-numeric:tabular-nums;white-space:nowrap}
+.cell .n sup{font-size:.32em;color:var(--sig);vertical-align:top;margin-left:4px}
+.cell p{font-size:17px;color:#cfcbc0;max-width:200px}
+.cell .mono{color:var(--mute)}
+.tagref{display:inline-block;border:1px solid var(--sig);color:var(--sig);padding:5px 8px}
+.foot{margin-top:16px;color:var(--mute)}
+/* directions */
+.dir{border-bottom:2px solid var(--ink)}
+.dir:first-of-type{border-top:2px solid var(--ink)}
+.dh{width:100%;display:grid;grid-template-columns:70px 1fr auto 50px;align-items:center;gap:18px;padding:14px 10px;text-align:left;position:relative;overflow:hidden;color:var(--ink)}
+.dh::before{content:"";position:absolute;inset:0;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(.7,0,.2,1);z-index:0}
+.dh>*{position:relative;z-index:1;transition:color .3s}
+.dir.open .dh::before{transform:scaleX(1)}
+.dir.open .dh>*{color:var(--paper)}
+.dh .i{font:700 14px/1 var(--mono)}
+.dh .nm{font:700 clamp(40px,7.4vw,132px)/.95 var(--disp);text-transform:uppercase}
+.dh .tg{font:500 clamp(14px,1.4vw,20px)/1.2 var(--mono);text-transform:uppercase;text-align:right}
+.dir.open .dh .tg{color:var(--sig)}
+.dh .pl{width:40px;height:40px;border:2px solid currentColor;display:grid;place-items:center;font:700 22px/1 var(--mono);transition:transform .35s,color .3s}
+.dir.open .dh .pl{transform:rotate(45deg);color:var(--sig)}
+.db{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s cubic-bezier(.7,0,.2,1)}
+.dir.open .db{grid-template-rows:1fr}
+.db>div{overflow:hidden}
+.dbi{display:flex;flex-wrap:wrap;gap:10px;padding:22px 10px 30px 98px}
+.chip{font:700 13px/1 var(--mono);text-transform:uppercase;letter-spacing:.05em;border:2px solid var(--ink);padding:12px 14px;transition:background .2s,color .2s}
+.chip:hover{background:var(--sig);border-color:var(--sig)}
+/* process */
+.proc{position:relative;display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:20px}
+.rail{position:absolute;left:0;right:0;top:54px;height:20px;background:repeating-linear-gradient(-45deg,#262624 0 8px,#121211 8px 16px);border-block:2px solid var(--paper)}
+.rail .pk{position:absolute;z-index:2;top:-14px;width:44px;height:44px;background:var(--sig);border:2px solid var(--paper);box-shadow:4px 4px 0 #000;animation:pk 10s linear infinite}
+@keyframes pk{0%{left:0}100%{left:calc(100% - 44px)}}
+.step{position:relative;padding:0 14px 0 0}
+.step .nd{width:128px;height:128px;border:2px solid var(--paper);background:var(--ink);display:grid;place-items:center;font:700 44px/1 var(--disp);position:relative;z-index:1;animation:lit 10s linear infinite;animation-delay:calc(var(--k)*2s - .6s)}
+@keyframes lit{0%,4%{background:var(--sig);color:var(--ink)}14%,100%{background:var(--ink);color:var(--paper)}}
+.step h3{font:700 clamp(28px,2.8vw,44px)/1 var(--disp);text-transform:uppercase;margin:22px 0 8px}
+.step p{color:#bcb8ad;font-size:15px}
+/* cases */
+.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,28px)}
+.case{border:2px solid var(--ink);background:var(--paper);transition:transform .2s,box-shadow .2s;display:flex;flex-direction:column}
+.case:hover{transform:translate(-6px,-6px);box-shadow:10px 10px 0 var(--sig)}
+.art{aspect-ratio:4/3;background:var(--ink);border-bottom:2px solid var(--ink);overflow:hidden;position:relative}
+.art svg{width:100%;height:100%;display:block}
+.art .lbl{position:absolute;left:12px;top:12px;color:var(--sig)}
+.cbody{padding:18px 18px 20px;display:flex;flex-direction:column;gap:12px;flex:1}
+.cbody h3{font:700 clamp(26px,2.4vw,38px)/.98 var(--disp);text-transform:uppercase}
+.spec{display:flex;justify-content:space-between;gap:10px;border-top:1px solid var(--lnd);padding-top:10px;margin-top:auto}
+.spec b{color:var(--sig);background:var(--ink);padding:4px 7px}
+.ex g{transition:transform .5s cubic-bezier(.7,0,.2,1)}
+.case:hover .ex .g1{transform:translateY(-22px)}.case:hover .ex .g3{transform:translateY(22px)}.case:hover .ex .g4{transform:translateY(40px)}
+.mol circle.f{animation:flt 3s ease-in-out infinite alternate}
+@keyframes flt{to{transform:translateY(-14px)}}
+.spin{transform-origin:center;transform-box:fill-box;animation:rot 8s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+/* clients + formats */
+.cli{font:700 clamp(54px,9vw,160px)/1.05 var(--disp);text-transform:uppercase;color:transparent;-webkit-text-stroke:2px var(--paper);border:0;padding:10px 0}
+.cli span{padding:0 .35em;transition:color .2s}
+.cli span:hover{color:var(--sig);-webkit-text-stroke-color:var(--sig)}
+.cli span.d{color:var(--sig);-webkit-text-stroke:0;font-size:.4em;vertical-align:middle}
+.fm{padding:10px 0;border-color:var(--ln)}
+.fm span{display:inline-block;font:700 clamp(16px,1.6vw,22px)/1 var(--mono);text-transform:uppercase;border:2px solid var(--paper);padding:14px 18px;margin-right:10px}
+.fm.rev span{border-color:var(--sig);color:var(--sig)}
+/* cta */
+.cta{background:var(--sig);color:var(--ink);overflow:hidden}
+.cta h2{font:700 clamp(56px,11vw,210px)/.86 var(--disp);text-transform:uppercase;letter-spacing:-.01em}
+.cta h2 span{display:block}
+.cta h2 .o{color:transparent;-webkit-text-stroke:2px var(--ink)}
+.big{margin-top:clamp(32px,5vw,64px);display:inline-flex;align-items:center;gap:28px;background:var(--ink);color:var(--paper);font:700 clamp(22px,3vw,44px)/1 var(--disp);text-transform:uppercase;padding:clamp(22px,2.6vw,36px) clamp(26px,3vw,48px);border:3px solid var(--ink);box-shadow:12px 12px 0 var(--paper);position:relative;overflow:hidden;transition:transform .12s,box-shadow .12s}
+.big::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(-45deg,var(--paper) 0 14px,var(--ink) 14px 28px);transform:translateY(101%);transition:transform .35s cubic-bezier(.7,0,.2,1);z-index:0}
+.big>*{position:relative;z-index:1}
+.big .ar{width:60px;height:60px;background:var(--sig);color:var(--ink);display:grid;place-items:center;font-size:.9em;transition:transform .3s}
+.big:hover{transform:translate(-3px,-3px);box-shadow:15px 15px 0 var(--paper)}
+.big:hover::before{transform:translateY(calc(100% - 10px))}
+.big:hover .ar{transform:rotate(-45deg)}
+.big:active{transform:translate(12px,12px);box-shadow:0 0 0 var(--paper)}
+.ftr{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:clamp(60px,8vw,120px);border-top:2px solid var(--ink);padding-top:16px}
+.rv{clip-path:inset(0 0 100% 0);transform:translateY(30px);transition:clip-path .9s cubic-bezier(.7,0,.2,1),transform .9s cubic-bezier(.7,0,.2,1)}
+.rv.in{clip-path:inset(0 0 -10% 0);transform:none}
+:focus-visible{outline:3px solid var(--sig);outline-offset:3px}
+/* ---------- responsive ---------- */
+@media (max-width:1000px){.nav,.hdr .hbtn{display:none}.burger{display:block}
+ .mnav.open{display:flex;flex-direction:column;position:fixed;top:56px;left:0;right:0;z-index:49;background:var(--ink);border-bottom:2px solid var(--sig);padding:10px var(--gut) 20px}
+ .mnav a{font:700 28px/1.5 var(--disp);text-transform:uppercase;border-bottom:1px solid var(--ln)}
+ .nums{grid-template-columns:repeat(2,1fr)}.cases{grid-template-columns:1fr 1fr}.cases .case:last-child{grid-column:1/-1}}
+@media (max-width:700px){
+ .wm span{display:none}
+ .hero{width:auto;right:var(--gut);top:72px}
+ .h1{margin:12px 0 12px}.lead{font-size:14.5px}.ctas{margin-top:16px;gap:10px}.btn{padding:14px 14px;font-size:12.5px;gap:8px}
+ .btn.pri{box-shadow:4px 4px 0 var(--paper)}
+ .slabel{top:72px;transform:none;width:auto;right:var(--gut)}
+ .slabel .num{font-size:64px;position:absolute;right:0;top:0}
+ .slabel h2{font-size:clamp(40px,12vw,56px);margin:6px 0 10px}.slabel p{font-size:14.5px}
+ .hint{display:none}.st0tag{display:block}
+ .tape{display:none}
+ .hud{grid-template-columns:auto 1fr;gap:6px;bottom:10px}.hud .hc:last-child{grid-column:1/-1}.hc{padding:7px 10px}.hc .v{font-size:16px}.hc .t{font-size:9px;letter-spacing:.06em}
+ .gate .beam{font-size:9px;height:30px}.gate .scan{top:30px}.gate::before,.gate::after{width:14px}
+ .nums{grid-template-columns:1fr 1fr}.cell{min-height:180px;padding:18px 14px}.cell p{font-size:14px}
+ .dh{grid-template-columns:34px 1fr 34px;gap:10px;padding:14px 4px}.dh .tg{grid-column:2;grid-row:2;text-align:left;font-size:12px}.dh .pl{grid-column:3;grid-row:1/3;width:32px;height:32px;font-size:18px}
+ .dbi{padding:14px 4px 24px}.chip{font-size:11.5px;padding:10px 11px}
+ .proc{grid-template-columns:1fr;gap:26px;padding-left:92px}
+ .rail{left:24px;right:auto;top:0;bottom:0;width:20px;height:auto;border-block:0;border-inline:2px solid var(--paper)}
+ .rail .pk{left:-14px;width:44px;height:44px;animation-name:pkv}
+ @keyframes pkv{0%{top:0}100%{top:calc(100% - 44px)}}
+ .step .nd{width:64px;height:64px;font-size:28px;position:absolute;left:-90px;top:0}
+ .step h3{margin-top:12px}
+ .cases{grid-template-columns:1fr}.cases .case:last-child{grid-column:auto}
+ .big{gap:16px;box-shadow:8px 8px 0 var(--paper)}.big .ar{width:44px;height:44px}
+ .shead{flex-direction:column;align-items:flex-start}
+}
+@media (prefers-reduced-motion:reduce){.mq-t,.rail .pk,.step .nd,.mol circle.f,.spin,.hint b{animation:none!important}.rv{clip-path:none;transform:none;transition:none}*{scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header class="hdr">
+ <a class="wm" href="#top" aria-label="Катализ — на главную"><b>Катал<i>и</i>з</b><span>студия Центра Бизнес Технологий</span></a>
+ <nav class="nav" aria-label="Основная навигация"><a href="#cases">Работы</a><a href="#dirs">Направления</a><a href="#process">Как мы работаем</a><a href="#clients">Клиенты</a><a href="#cta">Связаться</a></nav>
+ <a class="hbtn" href="#cta">Обсудить проект</a>
+ <button class="burger" id="burger" aria-expanded="false" aria-controls="mnav">Меню ☰</button>
+</header>
+<nav class="mnav" id="mnav" aria-label="Мобильная навигация"><a href="#cases">Работы</a><a href="#dirs">Направления</a><a href="#process">Как мы работаем</a><a href="#clients">Клиенты</a><a href="#cta">Связаться</a></nav>
+
+<main id="top">
+<section class="line" id="line" aria-label="Производственная линия">
+ <div class="pin" id="pin">
+  <div class="gridbg"></div>
+  <div class="track" id="track">
+   <div class="st" data-i="0">
+    <div class="hero">
+     <div class="eyebrow">Студия контента полного цикла</div>
+     <h1 class="h1">Точность<br><em>в каждой</em><br>детали</h1>
+     <p class="lead">От листовки до сложного 3D. ИИ-конвейер ускоряет производство в 2–4 раза — а освободившееся время мы тратим на мелочи.</p>
+     <div class="ctas"><a class="btn pri" href="#cta">Обсудить проект <span class="ar">→</span></a><a class="btn sec" href="#cases">Смотреть работы</a></div>
+    </div>
+    <div class="gate on"><div class="beam">СТ.01 · МАТЕРИЯ <span><i></i></span></div><div class="scan"></div></div>
+    <div class="st0tag">01 · Материя — «Из ничего»</div>
+   </div>
+   <div class="st" data-i="1"><div class="slabel"><span class="k mono">Станция 02 / 05</span><div class="num">02</div><h2>Молекула</h2><p>Наука: молекулы, механизмы действия</p></div><div class="gate"><div class="beam">СТ.02 · СИНТЕЗ <span><i></i></span></div><div class="scan"></div></div></div>
+   <div class="st" data-i="2"><div class="slabel"><span class="k mono">Станция 03 / 05</span><div class="num">03</div><h2>Сердце</h2><p>Медицина: анатомия с точностью до сосуда</p></div><div class="gate"><div class="beam">СТ.03 · АНАТОМИЯ <span><i></i></span></div><div class="scan"></div></div></div>
+   <div class="st" data-i="3"><div class="slabel"><span class="k mono">Станция 04 / 05</span><div class="num">04</div><h2>Механизм</h2><p>Инженерия: сборка и разборка любой сложности</p></div><div class="gate"><div class="beam">СТ.04 · СБОРКА <span><i></i></span></div><div class="scan"></div></div></div>
+   <div class="st" data-i="4"><div class="slabel"><span class="k mono">Станция 05 / 05 · Выдача</span><div class="num">05</div><h2>Ваш продукт</h2><p>Логотип / собранная форма</p></div><div class="gate"><div class="beam">СТ.05 · ВЫДАЧА <span><i></i></span></div><div class="scan"></div></div></div>
+  </div>
+  <div class="belt"><div class="surf" id="surf"></div><div class="rol" id="rol"></div><div class="mq tape" style="--d:50s" id="tape"></div></div>
+  <canvas id="gl" aria-hidden="true"></canvas>
+  <div class="hint mono">Линия запущена <b>■</b><br>Крутите вниз ↓</div>
+  <div class="hud" aria-live="off">
+   <div class="hc"><div class="t">Таймер производства</div><div class="v" id="timer">00:00:00</div></div>
+   <div class="hc"><div class="t">Срок проекта</div><div class="v"><s>3 недели</s> → <b id="days">21 день</b></div></div>
+   <div class="hc"><div class="t" id="stname">Станция 01/05 · Материя — «Из ничего»</div><div class="bar" id="bar"><i></i><i></i><i></i><i></i><i></i></div></div>
+  </div>
+ </div>
+</section>
+
+<section class="blk paper" id="manifest" aria-label="Манифест">
+ <div class="shead"><span class="mono">[01] Манифест</span><span class="mono">Катализ / ЦБТ</span></div>
+ <p class="manif" id="manif" data-hl="Машина,рутину.,Люди,точность.">Мы делаем любой контент — от поста до 3D-моделирования. Машина берёт рутину. Люди — идею, вкус и точность.</p>
+</section>
+<div class="mq band" style="--d:26s"><div class="mq-t"><span>Машина берёт рутину</span><span>Люди — идею, вкус и точность</span><span>Машина берёт рутину</span><span>Люди — идею, вкус и точность</span><span>Машина берёт рутину</span><span>Люди — идею, вкус и точность</span><span>Машина берёт рутину</span><span>Люди — идею, вкус и точность</span></div></div>
+
+<section class="blk gridbg" id="nums" aria-label="Цифры">
+ <div class="shead"><h2>Цифры</h2><span class="tagref mono">* Ориентир — уточняется</span></div>
+ <div class="nums">
+  <div class="cell"><span class="mono">Скорость</span><div class="n" data-v="2–4×">2–4×</div><p>быстрее</p></div>
+  <div class="cell"><span class="mono">Концепции</span><div class="n" data-v="100+">100+</div><p>вариантов концепции за день</p></div>
+  <div class="cell"><span class="mono">Опыт</span><div class="n" data-v="9">9</div><p>лет в продакшне</p></div>
+  <div class="cell"><span class="mono">Портфель</span><div class="n" data-v="800+">800+</div><p>проектов</p></div>
+ </div>
+ <p class="foot mono">* Все цифры — ориентир (плейсхолдеры для макета)</p>
+</section>
+
+<section class="blk paper" id="dirs" aria-label="Направления">
+ <div class="shead"><h2>Направления</h2><span class="mono">04 линии производства</span></div>
+ <div class="dir open"><button class="dh" aria-expanded="true"><span class="i">01</span><span class="nm">Визуал</span><span class="tg">всё, что смотрят</span><span class="pl">+</span></button><div class="db"><div><div class="dbi"><span class="chip">Айдентика</span><span class="chip">Ключевые визуалы</span><span class="chip">Упаковка</span><span class="chip">Карточки маркетплейсов</span><span class="chip">Полиграфия</span><span class="chip">Презентации</span></div></div></div></div>
+ <div class="dir"><button class="dh" aria-expanded="false"><span class="i">02</span><span class="nm">Движение и 3D</span><span class="tg">всё, что движется</span><span class="pl">+</span></button><div class="db"><div><div class="dbi"><span class="chip">Ролики</span><span class="chip">Моушн</span><span class="chip">ИИ-видео без съёмки</span><span class="chip">3D-модели</span><span class="chip">Механизмы</span><span class="chip">Анатомия</span></div></div></div></div>
+ <div class="dir"><button class="dh" aria-expanded="false"><span class="i">03</span><span class="nm">Интерактив</span><span class="tg">всё, что нажимают</span><span class="pl">+</span></button><div class="db"><div><div class="dbi"><span class="chip">Курсы SCORM</span><span class="chip">Тренажёры</span><span class="chip">ИИ-диалоги</span><span class="chip">Игры</span><span class="chip">Лендинги</span><span class="chip">Боты</span></div></div></div></div>
+ <div class="dir"><button class="dh" aria-expanded="false"><span class="i">04</span><span class="nm">Цифровые люди</span><span class="tg">все, кто говорит</span><span class="pl">+</span></button><div class="db"><div><div class="dbi"><span class="chip">ИИ-озвучка</span><span class="chip">Клон голоса</span><span class="chip">Аватары</span><span class="chip">Видеолекции</span><span class="chip">Дубляж</span></div></div></div></div>
+</section>
+
+<section class="blk" id="process" aria-label="Как мы работаем">
+ <div class="shead"><h2>Как мы работаем</h2><span class="mono">Конвейер · 5 этапов</span></div>
+ <div class="proc">
+  <div class="rail"><div class="pk"></div></div>
+  <div class="step" style="--k:0"><div class="nd">01</div><h3>Бриф</h3><p class="mono">Вход</p></div>
+  <div class="step" style="--k:1"><div class="nd">02</div><h3>Концепция</h3><p>100+ направлений за день</p></div>
+  <div class="step" style="--k:2"><div class="nd">03</div><h3>Продакшн</h3><p class="mono">Сборка</p></div>
+  <div class="step" style="--k:3"><div class="nd">04</div><h3>Контроль точности</h3><p class="mono">ОТК</p></div>
+  <div class="step" style="--k:4"><div class="nd">05</div><h3>Выдача во все каналы</h3><p class="mono">Выход</p></div>
+ </div>
+</section>
+
+<section class="blk paper" id="cases" aria-label="Работы">
+ <div class="shead"><h2>Работы</h2><span class="mono">03 кейса · партия 2026</span></div>
+ <div class="cases">
+  <article class="case rv"><div class="art"><span class="lbl mono">Кейс 01</span>
+   <svg viewBox="0 0 400 300" class="mol" aria-hidden="true"><path d="M0 210 Q50 190 100 210 T200 210 T300 210 T400 210" fill="none" stroke="#ece9e1" stroke-width="3"/><path d="M0 232 Q50 212 100 232 T200 232 T300 232 T400 232" fill="none" stroke="#ece9e1" stroke-width="3" opacity=".4"/>
+    <g fill="none" stroke="#ff5b1f" stroke-width="4"><path d="M150 210 v-44 a20 20 0 0 1 40 0 v44"/><path d="M250 210 v-44 a20 20 0 0 1 40 0 v44"/></g>
+    <g stroke="#ece9e1" stroke-width="2"><line x1="170" y1="90" x2="200" y2="70"/><line x1="200" y1="70" x2="232" y2="88"/><line x1="232" y1="88" x2="232" y2="122"/></g>
+    <circle class="f" cx="170" cy="90" r="13" fill="#ff5b1f"/><circle class="f" cx="200" cy="70" r="9" fill="#ece9e1"/><circle class="f" cx="232" cy="88" r="11" fill="#ece9e1"/><circle class="f" cx="232" cy="122" r="7" fill="#ff5b1f"/>
+    <circle class="f" cx="80" cy="120" r="6" fill="#ece9e1" style="animation-delay:-1s"/><circle class="f" cx="330" cy="100" r="8" fill="#ece9e1" style="animation-delay:-2s"/></svg></div>
+   <div class="cbody"><h3>«Механизм действия препарата»</h3><p>3D-анимация, 90 сек</p><div class="spec mono"><span>3D / Медицина</span><b>90 сек</b></div></div></article>
+  <article class="case rv"><div class="art"><span class="lbl mono">Кейс 02</span>
+   <svg viewBox="0 0 400 300" class="ex" aria-hidden="true"><g fill="none" stroke-width="2.5">
+    <g class="g1" stroke="#ece9e1"><path d="M200 60 L290 100 L200 140 L110 100Z"/><circle cx="200" cy="100" r="14"/></g>
+    <g class="g2" stroke="#ff5b1f"><path d="M200 120 L270 150 L200 180 L130 150Z"/><circle class="spin" cx="200" cy="150" r="20" stroke-dasharray="6 5"/></g>
+    <g class="g3" stroke="#ece9e1"><path d="M200 170 L280 205 L200 240 L120 205Z"/><path d="M120 205 v14 L200 254 L280 219 v-14"/></g>
+    <g class="g4" stroke="#8c887e" stroke-dasharray="4 4"><line x1="200" y1="114" x2="200" y2="190"/></g></g>
+    <g font-family="JetBrains Mono,monospace" font-size="12" fill="#ece9e1"><text x="300" y="98">A-01</text><text x="282" y="150">B-07</text><text x="292" y="206">C-140</text></g></svg></div>
+   <div class="cbody"><h3>«Разборка промышленного узла»</h3><p>Интерактивная 3D-модель, 140 деталей</p><div class="spec mono"><span>3D / Инженерия</span><b>140 дет.</b></div></div></article>
+  <article class="case rv"><div class="art"><span class="lbl mono">Кейс 03</span>
+   <svg viewBox="0 0 400 300" aria-hidden="true"><g stroke="#ece9e1" stroke-width="2.5" fill="none"><rect x="40" y="50" width="100" height="100" fill="#ff5b1f" stroke="#ff5b1f"/><rect x="155" y="50" width="90" height="200"/><rect x="260" y="50" width="100" height="70"/><rect x="40" y="165" width="100" height="85"/><rect x="260" y="135" width="100" height="115"/><path d="M300 170 l26 15 -26 15z" fill="#ff5b1f" stroke="none"/><line x1="170" y1="200" x2="230" y2="200"/><line x1="170" y1="215" x2="215" y2="215"/></g>
+    <text x="90" y="128" text-anchor="middle" font-family="Oswald,Impact,sans-serif" font-weight="700" font-size="76" fill="#0c0c0b">К</text><rect x="170" y="70" width="60" height="110" fill="#ece9e1"/><text x="200" y="138" text-anchor="middle" font-family="Oswald,Impact,sans-serif" font-weight="700" font-size="36" fill="#0c0c0b">К</text><text x="56" y="214" font-family="JetBrains Mono,monospace" font-size="13" fill="#ece9e1">WB/OZON</text><text x="276" y="92" font-family="JetBrains Mono,monospace" font-size="13" fill="#ff5b1f">ДЕНЬ 5/5</text></svg></div>
+   <div class="cbody"><h3>«Запуск бренда за 5 дней»</h3><p>Айдентика, упаковка, карточки, ролик</p><div class="spec mono"><span>Визуал</span><b>5 дней</b></div></div></article>
+ </div>
+</section>
+
+<section id="clients" aria-label="Клиенты" style="padding:clamp(60px,8vw,110px) 0">
+ <div class="shead" style="margin-inline:var(--gut)"><h2>Клиенты</h2><span class="mono">Отгружено</span></div>
+ <div class="mq cli" style="--d:38s"><div class="mq-t"><span>ЦентрФарма</span><span class="d">■</span><span>Омнифарма</span><span class="d">■</span><span>[Клиент]</span><span class="d">■</span><span>[Аптечная сеть]</span><span class="d">■</span><span>[Фармпроизводитель]</span><span class="d">■</span><span>ЦентрФарма</span><span class="d">■</span><span>Омнифарма</span><span class="d">■</span><span>[Клиент]</span><span class="d">■</span><span>[Аптечная сеть]</span><span class="d">■</span><span>[Фармпроизводитель]</span><span class="d">■</span></div></div>
+ <div style="margin:clamp(40px,6vw,80px) var(--gut) 18px" class="mono">[ Стена форматов ]</div>
+ <div class="mq fm" style="--d:60s" id="fm1"></div>
+ <div class="mq fm rev" style="--d:70s" id="fm2"></div>
+</section>
+
+<section class="blk cta" id="cta" aria-label="Связаться">
+ <span class="mono">[ Финал ] · Заявка на линию</span>
+ <h2 class="rv"><span>Есть задача?</span><span class="o">Соберём за дни,</span><span>а не месяцы.</span></h2>
+ <a class="big" href="mailto:hello@example.com"><span>Обсудить проект</span><span class="ar">→</span></a>
+ <div class="ftr mono"><span>Катализ — студия Центра Бизнес Технологий</span><span>Название «Катализ» — рабочее</span><span>© 2026</span></div>
+</section>
+</main>
+
+<script>
+(()=>{
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+// formats marquee
+const F='Брендбуки · Ключевые визуалы · Упаковка · Карточки WB/OZON · Полиграфия · Презентации · Маскоты · Ролики · ИИ-видео · 3D-модели · Механизмы · Молекулы · Анатомия · AR · SCORM-курсы · Тренажёры · ИИ-диалоги · HTML5-игры · Лендинги · Боты · Стенды · Озвучка · Аватары · Дубляж'.split(' · ');
+const half=Math.ceil(F.length/2),mk=a=>'<div class="mq-t">'+[...a,...a].map(x=>'<span>'+x+'</span>').join('')+'</div>';
+$('#fm1').innerHTML=mk(F.slice(0,half));$('#tape').innerHTML=mk(['Линия запущена','Бриф','Концепция','Продакшн','Контроль точности','Выдача во все каналы','Точность в каждой детали']);$('#fm2').innerHTML=mk(F.slice(half));
+// burger
+const bg=$('#burger'),mn=$('#mnav');
+bg.onclick=()=>{const o=mn.classList.toggle('open');bg.setAttribute('aria-expanded',o)};
+$$('#mnav a').forEach(a=>a.onclick=()=>{mn.classList.remove('open');bg.setAttribute('aria-expanded','false')});
+// manifesto words
+const mf=$('#manif'),hl=mf.dataset.hl.split(',');
+mf.innerHTML=mf.textContent.split(' ').map(w=>'<span'+(hl.includes(w)?' class="hl"':'')+'>'+w+'</span>').join(' ');
+const words=$$('#manif span');
+// accordion
+const dirs=$$('.dir'),hov=matchMedia('(hover:hover) and (pointer:fine)').matches;
+const openDir=d=>dirs.forEach(x=>{const o=x===d&&!(x.classList.contains('open')&&!hov);x.classList.toggle('open',o);x.querySelector('.dh').setAttribute('aria-expanded',o)});
+dirs.forEach(d=>{const h=d.querySelector('.dh');h.addEventListener('click',()=>openDir(d));if(hov)d.addEventListener('mouseenter',()=>{if(!d.classList.contains('open'))openDir(d)})});
+// reveal + counters
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add('in');io.unobserve(e.target);if(e.target.classList.contains('n'))scramble(e.target)}),{threshold:.2});
+$$('.cell .n').forEach(el=>io.observe(el));let rvs=$$('.rv');
+function scramble(el){if(RM)return;const fin=el.dataset.v;let k=0;const iv=setInterval(()=>{k++;el.textContent=k>16?fin:fin.replace(/\d/g,()=>Math.floor(Math.random()*10));if(k>16)clearInterval(iv)},45)}
+// ----- conveyor -----
+const line=$('#line'),pin=$('#pin'),track=$('#track'),sts=$$('.st'),gates=$$('.gate'),surf=$('#surf'),rol=$('#rol');
+const tEl=$('#timer'),dEl=$('#days'),sEl=$('#stname'),bars=$$('#bar i');
+const NAMES=['Материя — «Из ничего»','Молекула','Сердце','Механизм','Ваш продукт'];
+const L=window.LINE={p:0,m:0,ox:.68,oy:.47,gh:400,W:1,H:1,vis:true,rm:RM,hits:[]};
+function layout(){const W=pin.clientWidth,H=pin.clientHeight,mob=W<700;
+ L.W=W;L.H=H;L.mob=mob;L.ox=mob?.5:.68;L.oy=mob?.65:.45;L.gh=mob?Math.min(H*.32,W*.75):Math.min(H*.5,W*.34);
+ if(mob&&H<700)L.gh=Math.min(H*.26,W*.62);
+ pin.style.setProperty('--ox',L.ox*100+'%');pin.style.setProperty('--oy',L.oy*100+'%');pin.style.setProperty('--gh',L.gh+'px')}
+layout();addEventListener('resize',layout);
+const pad=n=>String(n).padStart(2,'0');
+const plural=n=>{const a=n%10,b=n%100;return n+' '+(a==1&&b!=11?'день':a>=2&&a<=4&&(b<10||b>=20)?'дня':'дней')};
+const ss=(a,b,x)=>{x=Math.min(1,Math.max(0,(x-a)/(b-a)));return x*x*(3-2*x)};
+let ps=0,lastM=0,lastSt=-1;
+let lt=performance.now();
+function frame(now){
+ const dt=Math.min(.1,((now||lt)-lt)/1000);lt=now||lt;
+ const r=line.getBoundingClientRect(),span=r.height-innerHeight;
+ const p=Math.min(1,Math.max(0,-r.top/span));
+ ps+=RM?(p-ps):(p-ps)*(1-Math.exp(-dt*8));if(Math.abs(p-ps)<1e-4)ps=p;
+ L.vis=r.bottom>0&&r.top<innerHeight;
+ if(L.vis){
+  const f=ps*4,i=Math.min(3,Math.floor(f)),t=f-i,m=ps>=1?4:i+ss(.5,.96,t);
+  L.p=ps;L.m=m;
+  track.style.transform='translate3d('+(-f*L.W).toFixed(1)+'px,0,0)';
+  const bx=(-f*L.W).toFixed(1)+'px 0';surf.style.backgroundPosition=bx;rol.style.backgroundPosition=bx;
+  // gate hit when crossing half of morph
+  const crossed=Math.floor(lastM+.5)!==Math.floor(m+.5);
+  if(crossed){const g=gates[Math.round(m)];if(g){g.classList.remove('hit');void g.offsetWidth;g.classList.add('hit')}L.hits.push(Math.round(m))}
+  lastM=m;
+  const st=Math.round(m);
+  if(st!==lastSt){sts.forEach((s,k)=>s.classList.toggle('act',k===st));gates.forEach((g,k)=>g.classList.toggle('on',k<=st));sEl.textContent='Станция '+pad(st+1)+'/05 · '+NAMES[st];lastSt=st}
+  bars.forEach((b,k)=>b.style.setProperty('--f',Math.min(1,Math.max(0,m-k+1)).toFixed(3)));
+  const sec=Math.round(ps*2832);tEl.textContent=pad(Math.floor(sec/3600))+':'+pad(Math.floor(sec/60)%60)+':'+pad(sec%60);
+  dEl.textContent=plural(Math.round(21-ps*16));
+ }
+ // reveals: clip-path hides targets from IntersectionObserver, so check rects
+ if(rvs.length)rvs=rvs.filter(e=>{if(e.getBoundingClientRect().top<innerHeight*.88){e.classList.add('in');return false}return true});
+ // manifesto
+ const mr=mf.getBoundingClientRect(),mp=(innerHeight*.85-mr.top)/(mr.height+innerHeight*.15);
+ const on=RM?words.length:Math.floor(mp*words.length*1.1);words.forEach((w,k)=>w.classList.toggle('on',k<on));
+ requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+})();
+</script>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+const L=window.LINE,cv=document.getElementById('gl');
+let renderer;
+try{renderer=new THREE.WebGLRenderer({canvas:cv,antialias:false,alpha:true,powerPreference:'high-performance'})}catch(e){cv.remove();throw 0}
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+const scene=new THREE.Scene(),cam=new THREE.PerspectiveCamera(35,1,.1,100);cam.position.z=10;
+const VH=2*10*Math.tan(THREE.MathUtils.degToRad(17.5));
+let seed=7;const R=()=>{seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296};
+const G=()=>{let u=R()||1e-6,v=R();return Math.sqrt(-2*Math.log(u))*Math.cos(6.2832*v)};
+const N=innerWidth<700?6000:10000;
+const shapes=[],accs=[];
+function make(fn){const p=new Float32Array(N*3),a=new Float32Array(N);for(let i=0;i<N;i++){const o=fn(i);p[i*3]=o[0];p[i*3+1]=o[1];p[i*3+2]=o[2];a[i]=o[3]||0}shapes.push(p);accs.push(a)}
+const sph=()=>{const z=R()*2-1,t=R()*6.2832,s=Math.sqrt(1-z*z);return[s*Math.cos(t),s*Math.sin(t),z]};
+// 0 raw block of dark matter
+make(()=>{const s=.78;let x=(R()*2-1)*s,y=(R()*2-1)*s,z=(R()*2-1)*s;
+ if(R()<.7){const ax=Math.floor(R()*3),sg=R()<.5?-1:1;if(ax==0)x=sg*s;else if(ax==1)y=sg*s;else z=sg*s}
+ const n=.09*(Math.sin(x*7+y*3)+Math.sin(y*6-z*5)+Math.sin(z*8+x*2));return[x+n*(x>0?1:-1)*.6,y+n,z+n*.7,R()<.02?1:0]});
+// 1 molecule
+const atoms=[];for(let k=0;k<6;k++){const a=k/6*6.2832;atoms.push([Math.cos(a)*.5,Math.sin(a)*.5,Math.sin(a*2)*.08,.16,0])}
+atoms.push([.98,.3,.15,.2,1],[-.98,.35,-.1,.17,0],[.15,-1.05,.2,.21,1],[-.5,-1.0,-.25,.13,0],[1.25,.85,.0,.12,0],[-1.3,.95,.1,.14,1]);
+const bonds=[[0,1],[1,2],[2,3],[3,4],[4,5],[5,0],[0,6],[2,7],[4,8],[8,9],[6,10],[7,11]].map(b=>[atoms[b[0]],atoms[b[1]]]);
+const aw=atoms.map(a=>a[3]*a[3]),awS=aw.reduce((a,b)=>a+b);
+make(()=>{if(R()<.8){let r=R()*awS,k=0;while(r>aw[k]){r-=aw[k];k++}const a=atoms[k],d=sph(),rr=a[3]*(.85+R()*.15);return[a[0]+d[0]*rr,a[1]+d[1]*rr,a[2]+d[2]*rr,a[4]]}
+ const b=bonds[Math.floor(R()*bonds.length)],t=R();return[b[0][0]+(b[1][0]-b[0][0])*t+G()*.018,b[0][1]+(b[1][1]-b[0][1])*t+G()*.018,b[0][2]+(b[1][2]-b[0][2])*t+G()*.018,0]});
+// 2 heart (implicit surface + vessels + coronary)
+const HF=(x,y,z)=>{const a=x*x+2.25*y*y+z*z-1;return a*a*a-x*x*z*z*z-.1125*y*y*z*z*z};
+const vess=[[[-.15,.55,0],[-.2,1.35,0],[.55,1.45,0],[.7,.9,-.1]],[[.2,.6,.15],[.25,1.15,.3],[-.35,1.3,.25],[-.55,1.0,.2]],[[-.35,.5,-.1],[-.55,.95,-.2],[-.75,1.0,-.2],[-.95,.9,-.25]]];
+const bez=(c,t)=>{const u=1-t;return[0,1,2].map(j=>u*u*u*c[0][j]+3*u*u*t*c[1][j]+3*u*t*t*c[2][j]+t*t*t*c[3][j])};
+make(()=>{if(R()<.17){const v=vess[Math.floor(R()*3)],t=R(),c=bez(v,t),d=sph(),rr=.11-t*.04;return[c[0]+d[0]*rr,c[1]+d[1]*rr,c[2]+d[2]*rr,1]}
+ const d=sph();let lo=0,hi=1.6;for(let k=0;k<22;k++){const m=(lo+hi)/2;HF(d[0]*m,d[1]*m,d[2]*m)<0?lo=m:hi=m}
+ const x=d[0]*lo,y=d[1]*lo,z=d[2]*lo,band=Math.abs(Math.sin(Math.atan2(y,x)*2+z*3.2))<.06;return[x*.85,z*.85-.1,y*.85,band?1:0]});
+// 3 mechanism: two meshing gears + axles
+function gear(cx,cy,Rr,n,dz,ph){const th=R()*6.2832,ro=Rr+.085*Math.max(-1,Math.min(1,Math.sin(n*(th+ph))*2.4)),q=R();let r,z;
+ if(q<.38){r=ro;z=(R()*2-1)*dz}else if(q<.75){r=ro-R()*.13*Rr-.03;z=R()<.5?-dz:dz}else if(q<.88){r=Rr*(.14+R()*.14);z=R()<.5?-dz:dz}
+ else{const k=Math.floor(R()*5),a=k/5*6.2832+(R()-.5)*.16;r=Rr*(.28+R()*.52);z=(R()*2-1)*dz*.8;return[cx+Math.cos(a)*r,cy+Math.sin(a)*r,z]}
+ return[cx+Math.cos(th)*r,cy+Math.sin(th)*r,z]}
+make(()=>{const q=R();if(q<.55)return[...gear(-.38,.22,.72,14,.16,0),0];if(q<.88)return[...gear(.62,-.5,.44,9,.12,.17),0];
+ const left=R()<.6,cx=left?-.38:.62,cy=left?.22:-.5,a=R()*6.2832;return[cx+Math.cos(a)*.07,cy+Math.sin(a)*.07,-.55+R()*1.1,1]});
+// 4 finished product: box with К mark
+const gc=document.createElement('canvas');gc.width=gc.height=128;const gx=gc.getContext('2d');gx.font='bold 120px Oswald, Impact, Arial Black, sans-serif';gx.textAlign='center';gx.textBaseline='middle';gx.fillText('К',64,70);
+const gd=gx.getImageData(0,0,128,128).data,gp=[];for(let y=0;y<128;y++)for(let x=0;x<128;x++)if(gd[(y*128+x)*4+3]>128)gp.push([x,y]);
+const BX=.62,BY=.82,BZ=.3;
+make(()=>{const q=R();if(q<.28&&gp.length){const p=gp[Math.floor(R()*gp.length)];return[(p[0]/128-.5)*1.0+(R()-.5)*.01,-(p[1]/128-.5)*1.0,BZ+.01,1]}
+ if(q<.62){const e=Math.floor(R()*12),t=R()*2-1,s1=e&1?1:-1,s2=e&2?1:-1,ax=e>>2;return ax==0?[t*BX,s1*BY,s2*BZ,0]:ax==1?[s1*BX,t*BY,s2*BZ,0]:[s1*BX,s2*BY,t*BZ,0]}
+ const f=Math.floor(R()*6),u=R()*2-1,v=R()*2-1,sg=f&1?1:-1;if(f<2)return[sg*BX,u*BY,v*BZ,0];if(f<4)return[u*BX,sg*BY,v*BZ,0];return[u*BX,v*BY,sg*BZ,f==5&&Math.abs(v+.82)<.04?1:0]});
+const geo=new THREE.BufferGeometry();
+geo.setAttribute('position',new THREE.BufferAttribute(shapes[0],3));for(let k=1;k<5;k++)geo.setAttribute('p'+k,new THREE.BufferAttribute(shapes[k],3));
+const accA=new Float32Array(N*4),rnd=new Float32Array(N);for(let i=0;i<N;i++){for(let k=0;k<4;k++)accA[i*4+k]=accs[k][i];rnd[i]=R()}
+geo.setAttribute('accA',new THREE.BufferAttribute(accA,4));geo.setAttribute('accB',new THREE.BufferAttribute(accs[4],1));geo.setAttribute('rnd',new THREE.BufferAttribute(rnd,1));
+const mat=new THREE.ShaderMaterial({transparent:true,depthWrite:false,uniforms:{uM:{value:0},uT:{value:0},uS:{value:1},uPx:{value:2}},
+vertexShader:`attribute vec3 p1,p2,p3,p4;attribute vec4 accA;attribute float accB,rnd;uniform float uM,uT,uS,uPx;varying float vAc,vSh,vD;
+vec3 sel(int i){if(i==0)return position;if(i==1)return p1;if(i==2)return p2;if(i==3)return p3;return p4;}
+float ac(int i){if(i==0)return accA.x;if(i==1)return accA.y;if(i==2)return accA.z;if(i==3)return accA.w;return accB;}
+void main(){float m=clamp(uM,0.,4.);int a=int(floor(m));int b=min(a+1,4);float t=m-float(a);
+float tt=clamp((t-rnd*.3)/.7,0.,1.);tt=tt*tt*(3.-2.*tt);vec3 P=mix(sel(a),sel(b),tt);float s=sin(3.14159*t);
+vec3 n=vec3(sin(rnd*91.+uT*1.3),cos(rnd*57.+uT*1.1),sin(rnd*33.-uT*.9));P+=n*(s*(.25+rnd*.55)+.008);
+vAc=mix(ac(a),ac(b),tt);vSh=s;vec4 mv=modelViewMatrix*vec4(P*uS,1.);vD=clamp((-mv.z-8.)/4.,0.,1.);
+gl_Position=projectionMatrix*mv;gl_PointSize=uPx*(.55+rnd*.9)*(10./-mv.z);}`,
+fragmentShader:`varying float vAc,vSh,vD;void main(){vec2 c=gl_PointCoord-.5;float d=length(c);if(d>.5)discard;
+vec3 paper=vec3(.925,.914,.882),sig=vec3(1.,.357,.122);vec3 col=mix(paper,sig,clamp(vAc+vSh*.35,0.,1.));col*=mix(1.,.38,vD);
+gl_FragColor=vec4(col,(1.-smoothstep(.3,.5,d))*.95);}`});
+const pts=new THREE.Points(geo,mat);pts.frustumCulled=false;const grp=new THREE.Group();grp.add(pts);scene.add(grp);
+// sparks
+const SN=500,sp=new Float32Array(SN*3),sv=new Float32Array(SN*3),sl=new Float32Array(SN);
+const sg=new THREE.BufferGeometry();sg.setAttribute('position',new THREE.BufferAttribute(sp,3));sg.setAttribute('life',new THREE.BufferAttribute(sl,1));
+const sm=new THREE.ShaderMaterial({transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,uniforms:{uPx:{value:2}},
+vertexShader:`attribute float life;varying float vL;uniform float uPx;void main(){vL=life;vec4 mv=modelViewMatrix*vec4(position,1.);gl_Position=projectionMatrix*mv;gl_PointSize=uPx*(1.+life*3.)*(10./-mv.z);}`,
+fragmentShader:`varying float vL;void main(){if(vL<=0.)discard;float d=length(gl_PointCoord-.5);if(d>.5)discard;gl_FragColor=vec4(mix(vec3(1.,.36,.12),vec3(1.,.9,.6),vL),vL);}`});
+const spk=new THREE.Points(sg,sm);spk.frustumCulled=false;scene.add(spk);let sIdx=0;
+function burst(cx,cy,sc){if(L.rm)return;for(let k=0;k<160;k++){const i=sIdx++%SN,side=R()<.5?-1:1,y=cy+(R()-.3)*sc*1.6;
+ sp[i*3]=cx+side*sc*.95;sp[i*3+1]=y;sp[i*3+2]=(R()-.5)*.5;sv[i*3]=-side*(.5+R()*3.2);sv[i*3+1]=1+R()*3.5;sv[i*3+2]=(R()-.5)*2;sl[i]=.6+R()*.4}}
+let W=0,H=0,last=performance.now(),time=0;
+function size(){const w=cv.clientWidth,h=cv.clientHeight;if(w===W&&h===H)return;W=w;H=h;renderer.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()}
+function loop(now){requestAnimationFrame(loop);const dt=Math.min(.05,(now-last)/1000);last=now;if(!L.vis)return;size();if(!L.rm)time+=dt;
+ const vw=VH*cam.aspect,cx=(L.ox-.5)*vw,cy=-(L.oy-.5)*VH,sc=L.gh/H*VH*(L.mob?.29:.33),dpr=renderer.getPixelRatio();
+ while(L.hits.length){L.hits.shift();burst(cx,cy,sc)}
+ grp.position.set(cx,cy,0);mat.uniforms.uS.value=sc;mat.uniforms.uM.value=L.m;mat.uniforms.uT.value=time;mat.uniforms.uPx.value=(L.mob?1.7:2.1)*dpr*(sc>1.1?1:.9);sm.uniforms.uPx.value=2*dpr;
+ grp.rotation.y=-.25+Math.sin(time*.45+L.p*9)*.55;grp.rotation.x=Math.sin(time*.5)*.1+.1;grp.rotation.z=Math.sin(time*.3)*.04;
+ for(let i=0;i<SN;i++){if(sl[i]<=0)continue;sv[i*3+1]-=9*dt;sp[i*3]+=sv[i*3]*dt;sp[i*3+1]+=sv[i*3+1]*dt;sp[i*3+2]+=sv[i*3+2]*dt;sl[i]-=dt*1.3}
+ sg.attributes.position.needsUpdate=true;sg.attributes.life.needsUpdate=true;renderer.render(scene,cam)}
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>
