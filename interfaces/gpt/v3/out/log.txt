@@ -1,1 +1,2 @@
 разбор: gpt-5.6, 8 ассетов, 194 с
+direction-visual-glass-orbit: gpt-image-2, 115 с
