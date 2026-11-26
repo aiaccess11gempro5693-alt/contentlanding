@@ -7,3 +7,4 @@ case-quantum-material-lattice: gpt-image-2, 96 с
 case-microflow-network: gpt-image-2, 100 с
 case-photonic-lens-system: gpt-image-2, 95 с
 case-ai-production-conveyor: gpt-image-2, 220 с
+готово
