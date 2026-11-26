@@ -1,0 +1,34 @@
+name: GPT v3 — разбор сайта и ассеты
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [claude/exciting-ritchie-3g0i71]
+    paths:
+      - interfaces/gpt/v3/prompt.md
+      - interfaces/gpt/v3/run.py
+      - .github/workflows/gpt-v3.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gpt-v3
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: GPT разбирает и рисует
+        env:
+          COMETAPI: ${{ secrets.COMETAPI }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          python interfaces/gpt/v3/run.py
