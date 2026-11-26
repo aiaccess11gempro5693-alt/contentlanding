@@ -2,3 +2,4 @@
 direction-visual-glass-orbit: gpt-image-2, 115 с
 direction-motion-fluid-ribbon: gpt-image-2, 114 с
 direction-interactive-wavefield: gpt-image-2, 113 с
+direction-digital-human-particles: gpt-image-2, 45 с
