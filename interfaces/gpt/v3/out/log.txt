@@ -4,3 +4,4 @@ direction-motion-fluid-ribbon: gpt-image-2, 114 с
 direction-interactive-wavefield: gpt-image-2, 113 с
 direction-digital-human-particles: gpt-image-2, 45 с
 case-quantum-material-lattice: gpt-image-2, 96 с
+case-microflow-network: gpt-image-2, 100 с
